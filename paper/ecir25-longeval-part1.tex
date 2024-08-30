@@ -1,0 +1,26 @@
+\section{Introduction}
+
+Many of the queries a search engine receives have been seen before {\color{red}[CITATION]}. XY.
+
+\begin{table}
+    \caption{Taxonomy reproduced and adapted from~\cite{keller:2024}.}
+    \label{tab:CRUD}
+    \begin{tabularx}{\linewidth}{l | X | X | X}
+        \toprule
+        {}       & \texttt{CREATE}          & \texttt{UPDATE}                 & \texttt{DELETE} \\ \midrule
+        Document & New unseen documents     & Known URL but changed website   & URL not in sub-collection anymore              \\\midrule
+        Topic    & New query                & Fixed typos, translation or changed accents marks                               & Query not in sub-collection anymore \\\midrule
+        Qrel     & New relevance label      & Known document query pair but changed relevance & Relevance became unknown   \\\bottomrule
+    \end{tabularx}
+\end{table}
+
+Changes in test collections are described on a high level by Keller et al. in~\cite{keller:2024} along the main components of a test collection, the documents, topics, and qrels, and the create, update, and delete operation of persistent storage. While the LongEval dataset contains changes in all components of all types, the investigated approaches are mainly concerned with changing documents that may also affect the relevance label.
+
+
+
+% We investigate the scenario D'TQ' and D'TQ -> Changes in the documents with and without changes in the qrels
+% Table 2 refers to the scenario of D'TQ -> documents changes but relevance stayed the same
+
+
+
+\input{table-examples}
