@@ -28,13 +28,23 @@ DS = [
     'longeval-train-20230513-training'
 ]
 
+expected_docs = set()
+for _, i in all_doc_groups():
+    for j in i:
+        expected_docs.add(j)
+
+
 docs = {}
-for d in tqdm(DS, 'Load docs_stores'):
-    d = ir_datasets.load(f'ir-benchmarks/{d}').docs_store()
-    for _, i in all_doc_groups():
-        for j in i:
-            if j in d:
-                docs[j] = d.default_text()
+for d in DS:
+    #docs_iter = ir_datasets.load(f'ir-benchmarks/{d}').docs_iter()
+
+    # needs to run the above first
+    with gzip.open(f'/mnt/ceph/storage/data-tmp/current/kibi9872/.tira/extracted_datasets/ir-benchmarks/{d}/input-data/documents.jsonl.gz') as f:
+        for i in tqdm(f, d):
+            i = json.loads(i)
+            if i['docno'] not in expected_docs:
+                continue
+            docs[i['docno']] = i['text']
 
 
 with open('../data/document-groups.jsonl', 'w') as outp:
