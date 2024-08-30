@@ -8,4 +8,4 @@ docker run -v ${PWD}:/app -w /app --rm -ti webis/chatnoir-copycat:1.0-jupyter \
 echo "Run the Document Similarity Scoring:"
 
 docker run -v ${PWD}:/app -w /app --rm -ti webis/chatnoir-copycat:1.0-jupyter \
-	java -cp /copycat/copycat-cli-1.0-SNAPSHOT-jar-with-dependencies.jar:. DocumentSimilarityScoring --input foo --output document-similarities.jsonl
+	java -cp /copycat/copycat-cli-1.0-SNAPSHOT-jar-with-dependencies.jar:. DocumentSimilarityScoring --input document-groups.jsonl --output document-similarities.jsonl

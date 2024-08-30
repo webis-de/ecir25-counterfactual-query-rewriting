@@ -6,9 +6,11 @@ from tqdm import tqdm
 import csv
 
 def all_doc_groups():
-    with gzip.open('../data/document-groups-judged.csv.gz', 'rt') as f:
+    with gzip.open('../data/document-groups-judged-extended.csv.gz', 'rt') as f:
         for l in csv.reader(f):
             url = l[0]
+            if url == 'url':
+                continue # skip header :)
             l.remove(url)
             assert len(l) == 6
             l = [i for i in l if i]
