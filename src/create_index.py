@@ -80,3 +80,16 @@ def load_data(sub_collection):
     )
 
     return topics, qrels, docid_map_patch, queryid_map
+
+
+def load_folds(path=BASE_PATH + "/splits.json"):
+
+    with open(path, "r") as f:
+        folds = json.load(f)
+
+    for k in folds.keys():
+        for fold in folds[k].keys():
+            for key in folds[k][fold].keys():
+                folds[k][fold][key] = set(folds[k][fold][key])
+
+    return folds
