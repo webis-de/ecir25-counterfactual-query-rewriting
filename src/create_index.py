@@ -5,11 +5,13 @@ import json
 import pandas as pd
 
 
-if not pt.started():
-    pt.init(boot_packages=["com.github.terrierteam:terrier-prf:-SNAPSHOT"])
+if not pt.java.started():
+    pt.java.add_package("com.github.terrierteam", "terrier-prf", "-SNAPSHOT")
 
 
-BASE_PATH = "../data"
+BASE_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data"
+)
 RESULTS_PATH = BASE_PATH + "/results"
 
 with open(BASE_PATH + "/LongEval/metadata.yml", "r") as yamlfile:
@@ -60,26 +62,7 @@ def load_data(sub_collection):
         names=["qid", "Q0", "docno", "relevance"],
     )
 
-    # ID maps
-    docid_map = pd.read_csv(
-        "../data/document-groups-relevant.csv.gz", compression="gzip"
-    )
-    docid_map_patch = (
-        docid_map[[sub_collection, "t" + str(int(sub_collection[-1]) - 1)]]
-        .dropna()
-        .set_index(sub_collection)
-        .to_dict()["t" + str(int(sub_collection[-1]) - 1)]
-    )
-
-    queryid_map = pd.read_csv("../data/query_id_map.csv")
-    queryid_map = (
-        queryid_map[[sub_collection, "t" + str(int(sub_collection[-1]) - 1)]]
-        .dropna()
-        .set_index(sub_collection)
-        .to_dict()["t" + str(int(sub_collection[-1]) - 1)]
-    )
-
-    return topics, qrels, docid_map_patch, queryid_map
+    return topics, qrels
 
 
 def load_folds(path=BASE_PATH + "/splits.json"):
