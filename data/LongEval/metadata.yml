@@ -1,0 +1,153 @@
+dataset: LongEval
+subcollections: 
+  t0:
+    alternative_names:
+      - "WT"
+      - "heldout"
+    source: ""
+    metadata: "LongEval/2023_train/publish/French/urls.txt"
+    documents:
+      json:
+        en: "LongEval/2023_train/publish/English/Documents/Json"
+        fr: "LongEval/2023_train/publish/French/Documents/Json"
+      trec:
+        en: "LongEval/2023_train/publish/English/Documents/Trec"
+        fr: "LongEval/2023_train/publish/French/Documents/Trec"
+    topics:
+      train:
+        tsv:
+          en: "LongEval/2023_train/publish/English/Queries/train.tsv"
+          fr: "LongEval/2023_train/publish/French/Queries/train.tsv"
+        trec:
+          en: "LongEval/2023_train/publish/English/Queries/train.trec"
+          fr: "LongEval/2023_train/publish/French/Queries/train.trec"
+      test:
+        tsv:
+          en: "LongEval/2023_train/publish/English/Queries/heldout.tsv"
+          fr: "LongEval/2023_train/publish/French/Queries/heldout.tsv"
+        trec:
+          en: "LongEval/2023_train/publish/English/Queries/heldout.trec"
+          fr: "LongEval/2023_train/publish/French/Queries/heldout.trec"
+    qrels: 
+      train: "LongEval/2023_train/publish/French/Qrels/train.txt"
+      test: "LongEval/2023_test/longeval-relevance-judgements/heldout-test.txt"
+
+  t1:
+    alternative_names:
+      - "ST"
+      - "A-Short-July"
+      - "a-short-july"
+    source: ""
+    metadata: "LongEval/2023_test/test-collection/A-Short-July/French/Documents/urls.txt"
+    documents:
+      json:
+        en: "LongEval/2023_test/test-collection/A-Short-July/English/Documents/Json"
+        fr: "LongEval/2023_test/test-collection/A-Short-July/French/Documents/Json"
+      trec:
+        en: "LongEval/2023_test/test-collection/A-Short-July/English/Documents/Trec"
+        fr: "LongEval/2023_test/test-collection/A-Short-July/French/Documents/Trec"
+    topics:
+      test:
+        tsv:
+          en: "LongEval/2023_test/test-collection/A-Short-July/English/Queries/test07.tsv"
+          fr: "LongEval/2023_test/test-collection/A-Short-July/French/Queries/test07.tsv"
+        trec:
+          en: "LongEval/2023_test/test-collection/A-Short-July/English/Queries/test07.trec"
+          fr: "LongEval/2023_test/test-collection/A-Short-July/French/Queries/test07.trec"
+    qrels: 
+      test: "LongEval/2023_test/longeval-relevance-judgements/a-short-july.txt"
+
+  t2:
+    alternative_names:
+    - "LT"
+    - "B-Long-September"
+    - "b-long-september"
+    source: ""
+    metadata: "LongEval/2023_test/test-collection/B-Long-September/French/Documents/urls.txt"
+    documents:
+      json:
+        en: "LongEval/2023_test/test-collection/B-Long-September/English/Documents/Json"
+        fr: "LongEval/2023_test/test-collection/B-Long-September/French/Documents/Json"
+      trec:
+        en: "LongEval/2023_test/test-collection/b-long-september/English/Documents/Trec"
+        fr: "LongEval/2023_test/test-collection/B-Long-September/French/Documents/Trec"
+    topics:
+      test:
+        tsv:
+          en: "LongEval/2023_test/test-collection/B-Long-September/English/Queries/test09.tsv"
+          fr: "LongEval/2023_test/test-collection/B-Long-September/French/Queries/test09.tsv"
+        trec:
+          en: "LongEval/2023_test/test-collection/B-Long-September/English/Queries/test09.trec"
+          fr: "LongEval/2023_test/test-collection/B-Long-September/French/Queries/test09.trec"
+    qrels: 
+      test: "LongEval/2023_test/longeval-relevance-judgements/B-Long-September.txt"
+
+
+  t3:
+    alternative_names:
+    - "2023_01"
+    source: ""
+    metadata: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Documents/id_urls_2023_01.txt"
+    documents:
+      json:
+        en: "LongEval/2024_train/LongEval Train Collection/2023_01/English/Documents/Json"
+        fr: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Documents/Json"
+      trec:
+        en: "LongEval/2024_train/LongEval Train Collection/2023_01/English/Documents/Trec"
+        fr: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Documents/Trec"
+    topics:
+      test:
+        tsv:
+          en: "LongEval/2024_train/LongEval Train Collection/2023_01/English/Queries/train.tsv"
+          fr: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Queries/train.tsv"
+        trec:
+          en: "LongEval/2024_train/LongEval Train Collection/2023_01/English/Queries/train.trec"
+          fr: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Queries/train.trec"
+    qrels: 
+      test: "LongEval/2024_train/LongEval Train Collection/2023_01/French/Qrels/train.txt"
+
+  t4:
+    alternative_names:
+    - "2023_06"
+    source: ""
+    metadata: "LongEval/2024_test/LongEval Test Collection/2023_06/French/Documents/id_urls_2023_06.txt"
+    documents:
+      json:
+        en: "LongEval/2024_test/LongEval Test Collection/2023_06/English/Documents/Json"
+        fr: "LongEval/2024_test/LongEval Test Collection/2023_06/French/Documents/Json"
+      trec:
+        en: "LongEval/2024_test/LongEval Test Collection/2023_06/English/Documents/Trec"
+        fr: "LongEval/2024_test/LongEval Test Collection/2023_06/French/Documents/Trec"
+    topics:
+      test:
+        tsv:
+          en: "LongEval/2024_test/LongEval Test Collection/2023_06/English/Queries/test.tsv"
+          fr: "LongEval/2024_test/LongEval Test Collection/2023_06/French/Queries/test.tsv"
+        trec:
+          en: "LongEval/2024_test/LongEval Test Collection/2023_06/English/Queries/test.trec"
+          fr: "LongEval/2024_test/LongEval Test Collection/2023_06/French/Queries/test.trec"
+    qrels: 
+      test: "LongEval/2024_test/qrels_jun_aug_longeval2024/01_qrels_jun.txt"
+
+  t5:
+    alternative_names:
+    - "2023_08"
+    source: ""
+    metadata: "LongEval/2024_test/LongEval Test Collection/2023_08/French/Documents/id_urls_2023_08.txt"
+    documents:
+      json:
+        en: "LongEval/2024_test/LongEval Test Collection/2023_08/English/Documents/Json"
+        fr: "LongEval/2024_test/LongEval Test Collection/2023_08/French/Documents/Json"
+      trec:
+        en: "LongEval/2024_test/LongEval Test Collection/2023_08/English/Documents/Trec"
+        fr: "LongEval/2024_test/LongEval Test Collection/2023_08/French/Documents/Trec"
+    topics:
+      test:
+        tsv:
+          en: "LongEval/2024_test/LongEval Test Collection/2023_08/English/Queries/test.tsv"
+          fr: "LongEval/2024_test/LongEval Test Collection/2023_08/French/Queries/test.tsv"
+        trec:
+          en: "LongEval/2024_test/LongEval Test Collection/2023_08/English/Queries/test.trec"
+          fr: "LongEval/2024_test/LongEval Test Collection/2023_08/French/Queries/test.trec"
+    qrels: 
+      test: "LongEval/2024_test/qrels_jun_aug_longeval2024/02_qrels_aug.txt"
