@@ -76,3 +76,4 @@ def load_folds(path=BASE_PATH + "/splits.json"):
                 folds[k][fold][key] = set(folds[k][fold][key])
 
     return folds
+

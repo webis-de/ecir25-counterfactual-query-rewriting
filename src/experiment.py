@@ -37,49 +37,49 @@ def main():
             train_docids = folds[sub_collection][fold_no]["train"]
             test_docids = folds[sub_collection][fold_no]["test"]
 
-        # Create index
-        test_index = create_index(sub_collection, fold_no, test_docids)
-        test_index = BASE_PATH + f"/index/{sub_collection}_{fold_no}"
+            # Create index
+            test_index = create_index(sub_collection, fold_no, test_docids)
+            test_index = BASE_PATH + f"/index/{sub_collection}_{fold_no}"
 
-        history = ["t0"] + sub_collections[: sub_collections.index(sub_collection)]
-        # System: BM25
-        BM25 = pt.BatchRetrieve(test_index, wmodel="BM25", verbose=True)
-        bm25_run = BM25(topics)
+            history = ["t0"] + sub_collections[: sub_collections.index(sub_collection)]
+            # System: BM25
+            BM25 = pt.BatchRetrieve(test_index, wmodel="BM25", verbose=True)
+            bm25_run = BM25(topics)
 
-        # System: qrel_boost
-        # run_qrel_boost = system_qrel_boost(
-        #     train_docids,
-        #     sub_collection,
-        #     topics,
-        #     test_index,
-        #     history=sub_collections[: sub_collections.index(sub_collection)],
-        #     fold_no=fold_no,
-        #     _lambda=0.5,
-        #     mu=2,
-        # )
+            # System: qrel_boost
+            run_qrel_boost = system_qrel_boost(
+                train_docids,
+                sub_collection,
+                topics,
+                test_index,
+                history=sub_collections[: sub_collections.index(sub_collection)],
+                fold_no=fold_no,
+                _lambda=0.5,
+                mu=2,
+            )
 
-        # System: RF
-        run_relevance_feedback = system_relevance_feedback(
-            train_docids,
-            sub_collection,
-            topics,
-            test_index,
-            history=history,
-            fold_no=fold_no,
-        )
-        # Evaluate
-        print(">>> Evaluate")
-        qrels = qrels[~qrels["docno"].isin(train_docids)]
+            # System: RF
+            run_relevance_feedback = system_relevance_feedback(
+                train_docids,
+                sub_collection,
+                topics,
+                test_index,
+                history=history,
+                fold_no=fold_no,
+            )
+            # Evaluate
+            print(">>> Evaluate")
+            qrels = qrels[~qrels["docno"].isin(train_docids)]
 
-        res = pt.Experiment(
-            # [bm25_run, run_qrel_boost, run_relevance_feedback],
-            [bm25_run, run_relevance_feedback],
-            topics,
-            qrels,
-            eval_metrics=["ndcg", "bpref", "map", "ndcg_cut.10", "P.10", "recall.100"],
-        )
+            res = pt.Experiment(
+                # [bm25_run, run_qrel_boost, run_relevance_feedback],
+                [run_qrel_boost, bm25_run, run_relevance_feedback],
+                topics,
+                qrels,
+                eval_metrics=["ndcg", "bpref", "map", "ndcg_cut.10", "P.10", "recall.100"],
+            )
 
-        print(res)
+            print(res)
 
 
 if __name__ == "__main__":

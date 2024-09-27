@@ -69,7 +69,7 @@ subcollections:
         en: "LongEval/2023_test/test-collection/B-Long-September/English/Documents/Json"
         fr: "LongEval/2023_test/test-collection/B-Long-September/French/Documents/Json"
       trec:
-        en: "LongEval/2023_test/test-collection/b-long-september/English/Documents/Trec"
+        en: "LongEval/2023_test/test-collection/B-Long-September/English/Documents/Trec"
         fr: "LongEval/2023_test/test-collection/B-Long-September/French/Documents/Trec"
     topics:
       test:
@@ -80,7 +80,7 @@ subcollections:
           en: "LongEval/2023_test/test-collection/B-Long-September/English/Queries/test09.trec"
           fr: "LongEval/2023_test/test-collection/B-Long-September/French/Queries/test09.trec"
     qrels: 
-      test: "LongEval/2023_test/longeval-relevance-judgements/B-Long-September.txt"
+      test: "LongEval/2023_test/longeval-relevance-judgements/b-long-september.txt"
 
 
   t3:
