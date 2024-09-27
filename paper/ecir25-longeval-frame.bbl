@@ -1,0 +1,42 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{jaleel:2004}
+Abdul-Jaleel, N., Allan, J., Croft, W.B., Diaz, F., Larkey, L., Li, X., Smucker, M.D., Wade, C.: Umass at trec 2004: Novelty and hard. Computer Science Department Faculty Publication Series p.~189 (2004)
+
+\bibitem{alkhalifa:2024}
+Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink, T., Galusc{\'{a}}kov{\'{a}}, P., S{\'{a}}ez, G.G., Goeuriot, L., Iommi, D., Liakata, M., Madabushi, H.T., Medina{-}Alias, P., Mulhem, P., Piroi, F., Popel, M., Zubiaga, A.: Extended overview of the {CLEF} 2024 longeval lab on longitudinal evaluation of model performance. In: Faggioli, G., Ferro, N., Galusc{\'{a}}kov{\'{a}}, P., de~Herrera, A.G.S. (eds.) Working Notes of the Conference and Labs of the Evaluation Forum {(CLEF} 2024), Grenoble, France, 9-12 September, 2024. {CEUR} Workshop Proceedings, vol.~3740, pp. 2267--2289. CEUR-WS.org (2024), \url{https://ceur-ws.org/Vol-3740/paper-213.pdf}
+
+\bibitem{amati:2003}
+Amati, G.: Divergence from randomness. (2003)
+
+\bibitem{chapelle:2009}
+Chapelle, O., Zhang, Y.: A dynamic bayesian network click model for web search ranking. In: Quemada, J., Le{\'{o}}n, G., Maarek, Y.S., Nejdl, W. (eds.) Proceedings of the 18th International Conference on World Wide Web, {WWW} 2009, Madrid, Spain, April 20-24, 2009. pp. 1--10. {ACM} (2009). \doi{10.1145/1526709.1526711}, \url{https://doi.org/10.1145/1526709.1526711}
+
+\bibitem{froebe:2022d}
+Fr{\"o}be, M., Akiki, C., Potthast, M., Hagen, M.: Noise-reduction for automatically transferred relevance judgments. In: Barr{\'{o}}n{-}Cede{\~{n}}o, A., {Da San Martino}, G., Esposti, M.D., Sebastiani, F., Macdonald, C., Pasi, G., Hanbury, A., Potthast, M., Faggioli, G., Ferro, N. (eds.) Experimental {IR} Meets Multilinguality, Multimodality, and Interaction. 13th International Conference of the {CLEF} Association ({CLEF} 2022). Lecture Notes in Computer Science, vol. 13390, pp. 48--61. Springer, Berlin Heidelberg New York (Sep 2022). \doi{10.1007/978-3-031-13643-6_4}
+
+\bibitem{froebe:2021a}
+Fr{\"o}be, M., Bevendorff, J., Gienapp, L., V{\"o}lske, M., Stein, B., Potthast, M., Hagen, M.: {CopyCat: Near-Duplicates within and between the ClueWeb and the Common Crawl}. In: Diaz, F., Shah, C., Suel, T., Castells, P., Jones, R., Sakai, T. (eds.) 44th International ACM Conference on Research and Development in Information Retrieval (SIGIR 2021). pp. 2398--2404. ACM (Jul 2021). \doi{10.1145/3404835.3463246}
+
+\bibitem{froebe-mis:2022}
+Fr{\"o}be, M., G{\"u}nther, S., Bondarenko, A., Huck, J., Hagen, M.: Using keyqueries to reduce misinformation in health-related search results. In: ROMCIR@ ECIR. pp. 1--10 (2022)
+
+\bibitem{froebe:2021c}
+Fr{\"o}be, M., Schmidt, E.O., Hagen, M.: Efficient query obfuscation with keyqueries. In: IEEE/WIC/ACM International Conference on Web Intelligence and Intelligent Agent Technology. pp. 154--161 (2021)
+
+\bibitem{keller:2024}
+Keller, J., Breuer, T., Schaer, P.: Evaluation of temporal change in {IR} test collections. In: Oosterhuis, H., Bast, H., Xiong, C. (eds.) Proceedings of the 2024 {ACM} {SIGIR} International Conference on Theory of Information Retrieval, {ICTIR} 2024, Washington, DC, USA, 13 July 2024. pp. 3--13. {ACM} (2024). \doi{10.1145/3664190.3672530}, \url{https://doi.org/10.1145/3664190.3672530}
+
+\bibitem{keller:2024b}
+Keller, J., Breuer, T., Schaer, P.: Leveraging prior relevance signals in web search. In: Faggioli, G., Ferro, N., Galusc{\'a}kov{\'a}, P., {de Herrera}, A.G.S. (eds.) Working Notes of the Conference and Labs of the Evaluation Forum ({{CLEF}} 2024), Grenoble, France, 9-12 September, 2024. {{CEUR}} Workshop Proceedings, vol.~3740, pp. 2396--2406. CEUR-WS.org (2024)
+
+\bibitem{li:2022}
+Li, S., Lv, F., Jin, T., Li, G., Zheng, Y., Zhuang, T., Liu, Q., Zeng, X., Kwok, J.T., Ma, Q.: Query rewriting in taobao search. In: Hasan, M.A., Xiong, L. (eds.) Proceedings of the 31st {ACM} International Conference on Information {\&} Knowledge Management, Atlanta, GA, USA, October 17-21, 2022. pp. 3262--3271. {ACM} (2022). \doi{10.1145/3511808.3557068}, \url{https://doi.org/10.1145/3511808.3557068}
+
+\bibitem{robertson:1994}
+Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.: Okapi at {{TREC-3}}. (Jan 1994)
+
+\end{thebibliography}

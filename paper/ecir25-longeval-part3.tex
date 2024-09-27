@@ -7,8 +7,17 @@ We noticed that queries overlap over different time slots, and in case their int
 Short analysis: how much did documents change? We use CopyCat~\cite{froebe:2021a}, as it was previously used to deduplicate web crawls, e.g., the ClueWebs, in default settings. ToDo: add motivation for measure and containment conceptually implemented by the S3 score.
 
 \begin{figure}[t]
-\includegraphics[width=\textwidth]{document-similarities}
-\vspace{-4ex}
-\caption{S$_{3}$ Similarities of documents with overlapping URLs as eCDF plot.}
-\label{fig:document-similarities}
+    \begin{minipage}{.49\textwidth}
+        \includegraphics[width=\textwidth]{query-overlap}
+        \vspace{-4ex}
+        \caption{Frequency of queries and points in time.}
+        \label{fig:query-overlap}
+    \end{minipage}
+    \hfill    
+    \begin{minipage}{.49\textwidth}
+        \includegraphics[width=\textwidth]{document-similarities}
+        \vspace{-4ex}
+        \caption{S$_{3}$ Similarities of documents with overlapping URLs as eCDF plot.}
+        \label{fig:document-similarities}
+    \end{minipage}
 \end{figure}

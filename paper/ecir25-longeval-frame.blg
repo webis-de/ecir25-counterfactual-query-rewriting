@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2023)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: ecir25-longeval-frame.aux
+The style file: splncs04.bst
+Database file #1: ecir25-longeval-lit.bib
+Warning--missing publisher in robertson:1994
+You've used 12 entries,
+            2850 wiz_defined-function locations,
+            683 strings with 8911 characters,
+and the built_in function-call counts, 9822 in all, are:
+= -- 753
+> -- 470
+< -- 13
++ -- 182
+- -- 169
+* -- 697
+:= -- 1277
+add.period$ -- 31
+call.type$ -- 12
+change.case$ -- 121
+chr.to.int$ -- 0
+cite$ -- 13
+duplicate$ -- 813
+empty$ -- 779
+format.name$ -- 187
+if$ -- 2095
+int.to.chr$ -- 0
+int.to.str$ -- 12
+missing$ -- 195
+newline$ -- 42
+num.names$ -- 38
+pop$ -- 367
+preamble$ -- 1
+purify$ -- 92
+quote$ -- 0
+skip$ -- 209
+stack$ -- 0
+substring$ -- 466
+swap$ -- 500
+text.length$ -- 13
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 46
+warning$ -- 1
+while$ -- 71
+width$ -- 14
+write$ -- 143
+(There was 1 warning)

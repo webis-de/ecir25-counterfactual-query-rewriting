@@ -1,14 +1,14 @@
 \section{Introduction}
 
-Many of the queries a search engine receives have been seen before {\color{red}[CITATION]}. By analyzing how users interact with the displayed results for these queries, valuable relevance information can be gathered. Such signals can be directly leveraged to improve the search engine's effectiveness. For example, based on the documents users click for a query, click models can be constructed that synthesize a relevance indicator. Based on these created labels, documents can be boosted or rerankers trained. While relevance feedback has shown to be effective, exploiting it as a boosting feature directly has a limited application. Time plays a crucial role since the queries, documents, and even the relevance may evolve over time. Documents may change their content, queries their intent, and even if both are static, the relevance may change because of external factors.
+Many of the queries a search engine receives have been seen before {\color{red}[CITATION]}. By analyzing how users interact with the displayed results for these queries, valuable relevance information can be gathered. Such signals can be directly leveraged to improve the search engine's effectiveness. For example, based on the documents users click for a query, click models can be constructed that synthesize a relevance indicator. Based on these created labels, documents can be boosted or rerankers trained. While relevance feedback has shown to be effective, exploiting it as a boosting feature directly has a limited application since the relevance signal does not naturally generalize to new topics and documents and may lead to unwanted biases. 
 
-To address these challenges, we explore how previous relevance labels can be used for query expansion in a temporal setting. Therefore, we describe different classes of temporal changes in websites and propose to create key queries based on the previously relevant documents.
+Time plays a crucial role since the queries, documents, and even the relevance may evolve over time. Documents may change their content, queries their intent, and even if both are static, the relevance may change because of external factors.
+
+To address these challenges, we explore how previous relevance labels can be used for query expansion in a temporal setting. Therefore, we first describe different classes of temporal changes in the web search setting and propose to create key queries based on the previously relevant documents.
 
 {\color{red}[key query introduction]}
 
-Through this method, we could exploit relevance feedback beyond known query document pairs to new documents. 
-The different retrieval scenarios and change operations are mapped out and 
-The approaches are tested in a preliminary evaluation based on the LongEval test collection and compared to different query expansion and boosting baselines.
+In an initial experimental evaluation we compare the key query approach to different query expansion and pseudo relevance feedback baselines on the evolving LongEval test collection. The results indicate that through these methods, we can exploit relevance feedback beyond known query document pairs to new documents. 
 
 
 

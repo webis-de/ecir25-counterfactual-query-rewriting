@@ -1,9 +1,26 @@
 \section{Evaluation}
 
-TBD.
+% TBD.
 
-Approaches for comparison:
+% Approaches for comparison:
 
-LTR by Gijs for another approach that incorporates historical relevance data.
+% LTR by Gijs for another approach that incorporates historical relevance data.
 
-Maybe few-shot prompting LLMs could be another baseline, but I would try to rather not include such baselines at the moment.
+% Maybe few-shot prompting LLMs could be another baseline, but I would try to rather not include such baselines at the moment.
+
+
+The LongEval test collections capture dynamic evaluation scenarios with different changes in all components. It evolves naturally over time, and a natural overlap between documents, queries, and qrels occurs. Since the explored approaches systematically exploit this overlap, the evaluation is challenging. Since the overlap occurs naturally in the test collection, evaluating the systems in this life-like scenario with redundancies is valid. However, we can hardly make any assumptions about how well the approaches generalize. Therefore, we include a second evaluation scenario that excludes any redundancies in the relevant documents.
+
+  
+\subsection{Baselines}
+The keyqueries approach is compared to further baselines. The qrel boost method directly boosts query document pairs of BM25~\cite{robertson:1994} that are known to be relevant from past points in time up based on a weighting factor $\lambda^2$ and all known and not relevant query document pairs down by $(1-\lambda)^2$. Additionally, since the LongEval test collection has graded relevance labels, the score of all highly relevant query document pairs is additionally multiplied by $\mu$. If more than one previous point in time is used for the boosting, the score of a query document pair is repeatedly multiplied by the boost. While this approach appears to be highly effective~\cite{alkhalifa:2024,keller:2024b}, it can not generalize to new documents and is therefore not effective for the cross-validation and only included as an upper bound naive baseline.
+
+Improving on this baseline, a tf-idf query expansion based on previously relevant documents wes tested. Instead of directly boosting known relevant query document pairs, the top 10 tf-idf terms from the relevant documents are used to expand the original query. The expanded query is then used to query the corpus with BM25. Like the qrel boost approach before, the tf-idf query expansion also only affects topics that are already known but can generalize to new documents.
+
+
+\subsection{Natural Evolving Test Collection}
+In this evaluation scenario, the effectiveness is assessed in a life-like setting where the overlap naturally occurs. Thus, this setting can describe the effectiveness as it may occur in a web search scenario. Currently, the test collection covers six pints in time with, on average, 1.77 million documents. For each point in time between 407 and 1518 queries are logged and on average, 12874 qrels are constructed through the simplified Dynamic Bayesian Network (sDBN) Click Model~\cite{chapelle:2009}. The topic overlap between points in time is displayed in Figure~\ref{fig:query-overlap}, indicating that less than a third of the queries are logged repeatedly.
+
+
+\subsection{Temporal Per Topic Cross Validation}
+To emphasize the actual effect of the approaches and how well they generalize to new documents, we evaluated them in a cross-validation setting. For each topic at each point in time, the relevant documents are split into $k$ folds. For each fold, the test, all documents except the ones in the train split are indexed and retrieved. The different approaches can then use the documents in the train split if they were already present at the previous points in time. Since some documents can be relevant for multiple topics, the train test splits must be updated after creation to avoid duplicates. This makes the splits less random and differently large but should be neglectable for this initial evaluation.
