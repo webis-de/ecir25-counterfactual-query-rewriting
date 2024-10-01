@@ -37,14 +37,32 @@ def main():
             train_docids = folds[sub_collection][fold_no]["train"]
             test_docids = folds[sub_collection][fold_no]["test"]
 
+
             # Create index
             test_index = create_index(sub_collection, fold_no, test_docids)
             test_index = BASE_PATH + f"/index/{sub_collection}_{fold_no}"
-
             history = ["t0"] + sub_collections[: sub_collections.index(sub_collection)]
+
+            
             # System: BM25
             BM25 = pt.BatchRetrieve(test_index, wmodel="BM25", verbose=True)
             bm25_run = BM25(topics)
+            pt.io.write_results(bm25_run, os.path.join(RESULTS_PATH, f"BM25_{sub_collection}_F{fold_no}"))
+
+
+            # System: BM25+Bo1
+            bo1 = pt.rewrite.Bo1QueryExpansion(test_index)
+            bm25_bo1_pipe = BM25 >> bo1 >> BM25
+            bm25_bo1_run = bm25_bo1_pipe(topics)
+            pt.io.write_results(bm25_bo1_run, os.path.join(RESULTS_PATH, f"BM25+Bo1_{sub_collection}_F{fold_no}"))
+
+
+            # System: BM25+RM3
+            rm3 = pt.rewrite.RM3(test_index)
+            bm25_rm3_pipe = BM25 >> rm3 >> BM25
+            bm25_rm3_run = bm25_rm3_pipe(topics)
+            pt.io.write_results(bm25_rm3_run, os.path.join(RESULTS_PATH, f"BM25+RM3_{sub_collection}_F{fold_no}"))
+
 
             # System: qrel_boost
             run_qrel_boost = system_qrel_boost(
@@ -58,6 +76,7 @@ def main():
                 mu=2,
             )
 
+
             # System: RF
             run_relevance_feedback = system_relevance_feedback(
                 train_docids,
@@ -67,6 +86,7 @@ def main():
                 history=history,
                 fold_no=fold_no,
             )
+            
             # Evaluate
             print(">>> Evaluate")
             qrels = qrels[~qrels["docno"].isin(train_docids)]

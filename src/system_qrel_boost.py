@@ -173,14 +173,14 @@ def system_qrel_boost(
     train_docids, sub_collection, topics, index, history, fold_no, _lambda=0.5, mu=2
 ):
     print(">>> Use history:", history)
-    run_name = f"/BM25+qrel_boost_{sub_collection}_F{fold_no}-{''.join(history)}_l-{_lambda}_m-{mu}"
+    run_name = f"/BM25+qrel_boost_{sub_collection}_F{fold_no}_H{''.join(history)}_l{_lambda}_m{mu}"
 
-    # BM25 top 1500 as baseline
+    # BM25 top 1500 as baseline, retrieve more results to filter
     BM25 = pt.BatchRetrieve(
         index, wmodel="BM25", verbose=True, num_results=1500
-    )  # retrieve more results to filter
+    )  
     pt.io.write_results(BM25(topics), RESULTS_PATH + run_name + "-long")
-
+    
     extend_run_full(RESULTS_PATH + run_name + "-long", sub_collection)
 
     # we need the topic sub-collection to merge the qrels
@@ -192,5 +192,9 @@ def system_qrel_boost(
     run = qrel_boost(run, history, _lambda, mu)
 
     pt.io.write_results(run, RESULTS_PATH + run_name)
+    
+    #cleanup
+    os.remove(RESULTS_PATH + run_name + "-long")
+    os.remove(RESULTS_PATH + run_name + "_extended." + sub_collection)
 
     return pt.io.read_results(RESULTS_PATH + run_name)
