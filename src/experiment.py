@@ -29,9 +29,6 @@ def main():
         topics, qrels = load_data(sub_collection)
 
         # for pyterrier
-        topics["query"] = topics["query"].str.replace("'", "")
-        topics["query"] = topics["query"].str.replace("/", "")
-
         for fold_no in range(0, len(folds[sub_collection])):
             fold_no = str(fold_no)
             train_docids = folds[sub_collection][fold_no]["train"]
@@ -45,21 +42,21 @@ def main():
 
             
             # System: BM25
-            BM25 = pt.BatchRetrieve(test_index, wmodel="BM25", verbose=True)
+            BM25 = pt.terrier.Retriever(test_index, wmodel="BM25", verbose=True)
             bm25_run = BM25(topics)
             pt.io.write_results(bm25_run, os.path.join(RESULTS_PATH, f"BM25_{sub_collection}_F{fold_no}"))
 
 
             # System: BM25+Bo1
             bo1 = pt.rewrite.Bo1QueryExpansion(test_index)
-            bm25_bo1_pipe = BM25 >> bo1 >> BM25
+            bm25_bo1_pipe = pt.Transformer.from_df(bm25_run) >> bo1 >> BM25
             bm25_bo1_run = bm25_bo1_pipe(topics)
             pt.io.write_results(bm25_bo1_run, os.path.join(RESULTS_PATH, f"BM25+Bo1_{sub_collection}_F{fold_no}"))
 
 
             # System: BM25+RM3
             rm3 = pt.rewrite.RM3(test_index)
-            bm25_rm3_pipe = BM25 >> rm3 >> BM25
+            bm25_rm3_pipe = pt.Transformer.from_df(bm25_run) >> rm3 >> BM25
             bm25_rm3_run = bm25_rm3_pipe(topics)
             pt.io.write_results(bm25_rm3_run, os.path.join(RESULTS_PATH, f"BM25+RM3_{sub_collection}_F{fold_no}"))
 
@@ -70,9 +67,9 @@ def main():
                 sub_collection,
                 topics,
                 test_index,
-                history=sub_collections[: sub_collections.index(sub_collection)],
+                history=history,
                 fold_no=fold_no,
-                _lambda=0.5,
+                _lambda=0.7,
                 mu=2,
             )
 
@@ -93,7 +90,7 @@ def main():
 
             res = pt.Experiment(
                 # [bm25_run, run_qrel_boost, run_relevance_feedback],
-                [run_qrel_boost, bm25_run, run_relevance_feedback],
+                [bm25_run, bm25_bo1_run, bm25_rm3_run],
                 topics,
                 qrels,
                 eval_metrics=["ndcg", "bpref", "map", "ndcg_cut.10", "P.10", "recall.100"],

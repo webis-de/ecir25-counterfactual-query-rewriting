@@ -20,13 +20,18 @@ with open(BASE_PATH + "/LongEval/metadata.yml", "r") as yamlfile:
 
 def extract_top_terms(texts, top_n=10, query=None):
     vectorizer = TfidfVectorizer(stop_words="english", max_features=10000)
-    tfidf_matrix = vectorizer.fit_transform(texts)
-    feature_names = vectorizer.get_feature_names_out()
-    sums = tfidf_matrix.sum(axis=0)
-    data = []
-    for col, term in enumerate(feature_names):
-        data.append((term, sums[0, col]))
-    top_terms = sorted(data, key=lambda x: x[1], reverse=True)[:top_n]
+    try:
+        tfidf_matrix = vectorizer.fit_transform(texts)
+        feature_names = vectorizer.get_feature_names_out()
+        sums = tfidf_matrix.sum(axis=0)
+        data = []
+        for col, term in enumerate(feature_names):
+            data.append((term, sums[0, col]))
+        top_terms = sorted(data, key=lambda x: x[1], reverse=True)[:top_n]
+    except ValueError:
+        print(">>> No relevant token found for feedback")
+        print(texts)
+        top_terms = []
     return top_terms
 
 
@@ -116,7 +121,7 @@ def system_relevance_feedback(
     # new_topics = topics[topics["qid"].isin(new_topics)]
     # extended_topics = pd.DataFrame(extended_topics)
 
-    BM25 = pt.BatchRetrieve(index, wmodel="BM25", verbose=True)
+    BM25 = pt.terrier.Retriever(index, wmodel="BM25", verbose=True)
 
     # print(">>> Run RM3 with pseudo relevance feedback")
     # rm3_pipe = BM25 >> pt.rewrite.RM3(index) >> BM25

@@ -14,26 +14,14 @@ BASE_PATH = os.path.join(
 )
 RESULTS_PATH = BASE_PATH + "/results"
 
+def chunker(seq, size):
+    return (seq[pos : pos + size] for pos in range(0, len(seq), size))
 
-def extend_run_full(run_path, sub_collection):
-    # Connect to the SQLite database
+def extend_with_doc_ids(run, sub_collection):
     conn = sqlite3.connect(BASE_PATH + "/database.db")
-
-    print(">>> Loaded run")
-    run = pd.read_csv(
-        run_path,
-        sep=" ",
-        names=["queryid", "0", "docid", "relevance", "score", "run"],
-        index_col=False,
-    )
-
-    # Load doc map
-    print(">>> Load doc map")
-    docids = run["docid"].unique()
-
-    def chunker(seq, size):
-        return (seq[pos : pos + size] for pos in range(0, len(seq), size))
-
+    docids = run["docno"].unique()
+    
+    # create patch for docid to url mapping for docs in run
     query_base = "SELECT docid, url FROM Document WHERE docid IN ({})"
 
     results = []
@@ -42,15 +30,16 @@ def extend_run_full(run_path, sub_collection):
         query = query_base.format(placeholders)
         result = pd.read_sql_query(query, conn, params=chunk)
         results.append(result)
-
+        
     docmapper = pd.concat(results, ignore_index=True)
-
+    
+    # create patch for docid to subcollection mapping for docs in run
     query_base = "SELECT docid, url, sub_collection FROM Document WHERE url IN ({})"
 
     results = []
     for chunk in tqdm(
         chunker(docmapper["url"].unique(), 10_000), total=len(docmapper) / 10_000
-    ):
+        ):
         placeholders = ", ".join(["?"] * len(chunk))
         query = query_base.format(placeholders)
         params = list(chunk)
@@ -59,10 +48,22 @@ def extend_run_full(run_path, sub_collection):
 
     docid_map = pd.concat(results, ignore_index=True)
     docid_map = docid_map.pivot(index="url", columns="sub_collection", values="docid")
+    
+    
+    run_docids_extended = run.merge(
+        docid_map.add_prefix("docno_"),
+        left_on="docno",
+        right_on=f"docno_{sub_collection}",
+        how="left",
+    )
+    
+    return run_docids_extended
 
-    # Querymap
-    print(">>> Load query map")
-    queryids = run["queryid"].unique()
+
+def extend_with_query_ids(run, sub_collection):
+    conn = sqlite3.connect(BASE_PATH + "/database.db")
+
+    queryids = run["qid"].unique()
     query = "SELECT queryid, text_fr FROM Topic WHERE queryid IN (%s);" % ",".join(
         "?" * len(queryids)
     )
@@ -78,95 +79,65 @@ def extend_run_full(run_path, sub_collection):
     query_text_fr_map = query_text_fr_map.pivot(
         index=["text_fr", "text_en"], columns="sub_collection", values="queryid"
     )
-
-    # Merge
-    print(">>> Extend run")
-    run_docids_extended = run.merge(
-        docid_map.add_prefix("docid_"),
-        left_on="docid",
-        right_on=f"docid_{sub_collection}",
+    
+        
+    run_extended = run.merge(
+        query_text_fr_map.add_prefix("qid_"),
+        left_on="qid",
+        right_on=f"qid_{sub_collection}",
         how="left",
     )
-    run_extended = run_docids_extended.merge(
-        query_text_fr_map.add_prefix("queryid_"),
-        left_on="queryid",
-        right_on=f"queryid_{sub_collection}",
-        how="left",
-    )
-
-    run_extended.to_csv(
-        run_path[:-5] + "_extended." + sub_collection, sep=" ", index=False
-    )
+    
+    return run_extended
 
 
-def extend_with_qrels(run_name, history, train_docids):
+def extend_with_qrels(run, history, sub_collection, train_docids=None):
     conn = sqlite3.connect(BASE_PATH + "/database.db")
+       
     query = "SELECT * FROM qrel"
-    qrels = pd.read_sql_query(query, conn)
-
-    run = pd.read_csv(RESULTS_PATH + run_name, sep=" ")
-    qrels_map = qrels[["docid", "relevance"]].set_index("docid").to_dict()["relevance"]
-
-    def get_qrel(row, subcollection):
-        query_id = row[f"queryid_{subcollection}"]
-        doc_id = row[f"docid_{subcollection}"]
-        if doc_id in train_docids:
-            if isinstance(query_id, str) and isinstance(doc_id, str):
-                return qrels_map.get(
-                    row[f"queryid_{subcollection}"] + row[f"docid_{subcollection}"],
-                    None,
-                )
-            else:
-                return None
+    qrels_all = pd.read_sql_query(query, conn)
+    
+    
+    qrels_all["key"] = qrels_all["queryid"] + qrels_all["docid"]
+    qrels_map = qrels_all[["key", "relevance"]].set_index("key").to_dict()["relevance"]
+    
+    
+    def get_qrel(row, h, train_docids):
+        query_id = row[f"qid_{h}"]
+        docid_old = row[f"docno_{h}"]
+        doc_id_now = row[f"docno_{sub_collection}"]
+        
+        if doc_id_now not in train_docids:
+            return None
+        
+        elif isinstance(query_id, str) and isinstance(docid_old, str):
+            return qrels_map.get(
+                row[f"qid_{h}"] + row[f"docno_{h}"],
+                None,
+            )
         else:
             return None
 
-    for subcollection in history:
-        run[f"qrel_{subcollection}"] = run.apply(
-            get_qrel, subcollection=subcollection, axis=1
+    for h in history:
+        run[f"qrel_{h}"] = run.progress_apply(
+            get_qrel, h=h, train_docids=train_docids, axis=1
         )
-
     return run
+    
+    
+def qrel_boost(run_in, history, _lambda=0.5, mu=2):
+        run = run_in.copy()
+        run["score"] = run.groupby("qid")["score"].transform(lambda x: x / x.max())
 
+        for h in history:
+            run.loc[run[f"qrel_{h}"] == 1, "score"] *= _lambda ** 2
+            run.loc[run[f"qrel_{h}"] == 2, "score"] *= (_lambda ** 2) * mu
+            run.loc[(run[f"qrel_{h}"] == 0) | (run[f"qrel_{h}"].isna()), "score"] *= (1 - _lambda) ** 2
 
-def qrel_boost(run, history, _lambda=0.5, mu=2):
-    # min max normalization per topic
-    run["score"] = run.groupby("queryid")["score"].transform(lambda x: x / x.max())
+        run = run.sort_values(["qid", "score"], ascending=False).groupby("qid").head(1000)
+        run["rank"] = run.groupby("qid")["score"].rank(ascending=False).astype(int)
+        return run[["qid", "docno", "score", "rank"]]
 
-    for subcollection in history:
-        # Relevant
-        run.loc[run[f"qrel_{subcollection}"] == 1, "score"] = (
-            run.loc[run[f"qrel_{subcollection}"] > 0, "score"] * _lambda**2
-        )
-        run.loc[run[f"qrel_{subcollection}"] > 0, "score"] = (
-            run.loc[run[f"qrel_{subcollection}"] > 0, "score"] * (_lambda**2) * mu
-        )
-
-        # All Not Relevant
-        run.loc[
-            (run[f"qrel_{subcollection}"] == 0) | (run[f"qrel_{subcollection}"].isna()),
-            "score",
-        ] = (
-            run.loc[
-                (run[f"qrel_{subcollection}"] == 0)
-                | (run[f"qrel_{subcollection}"].isna()),
-                "score",
-            ]
-            * (1 - _lambda) ** 2
-        )
-
-    run = (
-        run.sort_values(["queryid", "score"], ascending=False)
-        .groupby("queryid")
-        .head(1000)
-    )
-    run["rank"] = run.groupby("queryid")["score"].rank(ascending=False).astype(int)
-
-    run = run[["queryid", "0", "docid", "score", "rank", "run"]].rename(
-        columns={"queryid": "qid", "docid": "docno"}
-    )
-
-    return run
 
 
 def system_qrel_boost(
@@ -175,26 +146,28 @@ def system_qrel_boost(
     print(">>> Use history:", history)
     run_name = f"/BM25+qrel_boost_{sub_collection}_F{fold_no}_H{''.join(history)}_l{_lambda}_m{mu}"
 
+
     # BM25 top 1500 as baseline, retrieve more results to filter
     BM25 = pt.BatchRetrieve(
         index, wmodel="BM25", verbose=True, num_results=1500
-    )  
-    pt.io.write_results(BM25(topics), RESULTS_PATH + run_name + "-long")
-    
-    extend_run_full(RESULTS_PATH + run_name + "-long", sub_collection)
-
-    # we need the topic sub-collection to merge the qrels
-    history_complete = history + [sub_collection]
-    run = extend_with_qrels(
-        run_name + "_extended." + sub_collection, history_complete, train_docids
     )
-
+    run = BM25(topics)
+    
+    if not train_docids:
+        train_docids = set(run["docno"].unique().tolist())
+    
+    print(">>> Extend with query ids")
+    run = extend_with_query_ids(run, sub_collection)
+    
+    print(">>> Extend with doc ids")
+    run = extend_with_doc_ids(run, sub_collection)
+    
+    print(">>> Extend with qrels")
+    run = extend_with_qrels(run, history, sub_collection, train_docids)
+    
+    print(">>> qrel_boost")
     run = qrel_boost(run, history, _lambda, mu)
 
     pt.io.write_results(run, RESULTS_PATH + run_name)
-    
-    #cleanup
-    os.remove(RESULTS_PATH + run_name + "-long")
-    os.remove(RESULTS_PATH + run_name + "_extended." + sub_collection)
 
-    return pt.io.read_results(RESULTS_PATH + run_name)
+    return run
