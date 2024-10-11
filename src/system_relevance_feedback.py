@@ -95,7 +95,7 @@ def system_relevance_feedback(
     docid_map = pd.read_csv(
         BASE_PATH + "/document-groups-relevant.csv.gz", compression="gzip"
     )
-    queryid_map = pd.read_csv(BASE_PATH + "/query_id_map.csv")
+    queryid_map = pd.read_csv(BASE_PATH + "/query_id_map.gz", compression="gzip")
 
     queryid_map = queryid_map.dropna(subset=[sub_collection]).set_index(sub_collection)[
         history
