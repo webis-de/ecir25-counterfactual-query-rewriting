@@ -13,3 +13,40 @@ In an initial experimental evaluation we compare the key query approach to diffe
 
 
 \input{table-examples}
+
+
+\begin{table}[t]%
+    \small%
+    \centering%
+    \renewcommand{\tabcolsep}{4pt}%
+    \caption{}%
+    \label{table-examples-2}%
+    \begin{tabular}[t]{@{}lllll@{}}
+    \toprule
+    {\bfseries Query} & \multicolumn{2}{@{}c@{}}{\bfseries Document} & {\bfseries Comment} & {\bfseries Type}\\
+    \cmidrule(l@{\tabcolsep}r@{\tabcolsep}){2-3}
+    
+    & Version~1 ($t_0$) & Version~2 ($t_1$)\\
+    \midrule
+    
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website initially\\ crawled}} &  \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{CREATE}}}\\\\\\
+    \midrule
+
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website removed \\ from index}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{DELETE}}}\\\\\\
+    \midrule
+
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website content changed \\ relevance stays the same}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{UPDATE}}}\\\\\\
+    \midrule
+
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website content changed \\ relevance changed}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{UPDATE}}}\\\\\\
+    \midrule
+
+    \bottomrule
+
+    \end{tabular}
+    \end{table}  
+    
