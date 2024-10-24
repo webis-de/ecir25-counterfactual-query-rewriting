@@ -165,3 +165,7 @@ cython_debug/
 data/LongEval/*
 data/index/*
 data/database.db
+paper/ecir25-longeval-frame.aux
+paper/ecir25-longeval-frame.blg
+paper/ecir25-longeval-frame.pdf
+paper/ecir25-longeval-frame.synctex.gz

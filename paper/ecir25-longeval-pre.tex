@@ -1,4 +1,4 @@
-\title{Counterfactual Query Rewriting \\ for Historical Relevance Feedback}
+\title{Counterfactual Query Rewriting \\ to Use Historical Relevance Feedback}
 %\title{Query Reformulation for Historical Relevance Data}
 %\title{Query Reformulation for Recurring Search Queries}
 %\title{Query Reformulation for Recurring Web Search Queries}
@@ -6,22 +6,18 @@
 
 %\titlerunning{Abbreviated paper title}
 
-\author{First Author\inst{1} \and
-Maik's Mic\inst{2,3} \and
-Third Author\inst{3}}
+\author{No author given}
 %
-\authorrunning{F. Author et al.}
+\authorrunning{No author given}
 % First names are abbreviated in the running head.
 % If there are more than two authors, 'et al.' is used.
 %
-\institute{Princeton University, Princeton NJ 08544, USA \and
-Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
-\email{lncs@springer.com}}
+\institute{No institute given}
 %
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-Search engines have seen many of the submitted queries before, which might provide valuable relevance feedback for recurring queries that did not change their intent. However, this relevance feedback can often not be applied directly, as documents that were previously relevant to a query might not exist anymore or might have substantially changed content. By counterfactually assuming that the previously relevant document still exists, we can formulate so-called keyqueries so that the previously relevant documents, if they would still exist, would be retrieved at the top positions of the ranking. Our evaluations in the LongEval scenario with varying time gaps between 1~month to 1~year and naturally and simulated removed/changed documents show that XYZ.
+When a retrieval system receives a query that it has encountered before, previous relevance feedback like clicks or explicit judgments can be useful to return good results. However, the content of a previously relevant document may have changed or the document might even not be available anymore. In this paper, we propose to counterfactually assume that the relevant versions of the documents are still part of the retrieval collection (i.e., we artificially include them). Against this slightly changed collection, we derive so-called keyqueries for the previously relevant document variants---i.e., queries that return the relevant document variants in the top ranks. From the keyqueries' results, we then remove the artificially included document variants to derive the final retrieval result. Our evaluation in the scenario of the CLEF LongEval shared task shows that \ldots
 
-\keywords{Query Rewriting \and Longtitutal evaluation \and Another keyword.}
+\keywords{Query Rewriting \and Keyqueries \and Longitudinal evaluation}
 \end{abstract}
