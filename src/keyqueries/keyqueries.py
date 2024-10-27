@@ -5,6 +5,7 @@ import argparse
 from tira.third_party_integrations import ensure_pyterrier_is_loaded
 from tira.rest_api_client import Client
 from tqdm import tqdm
+from random import randint
 from pathlib import Path
 
 
@@ -35,7 +36,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Construct neighbors')
     parser.add_argument('--input-dataset', type=str, help='Input file', default='cranfield-20230107-training')
     parser.add_argument('--output-dir', type=str, help='Output file', required=True)
-    parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.parent.resolve() / 'input-data-for-keyqueries.jsonl.gz').absolute()), required=False)
+    parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.parent.parent.resolve() / 'data' / 'input-data-for-keyqueries.jsonl.gz').absolute()), required=False)
     parser.add_argument('--fb-terms', type=list, help='fb_terms passed to pyterrier', nargs='+', default=[10, 20, 30], required=False)
     parser.add_argument('--w-models', type=list, help='weighting models passed to pyterrier', nargs='+', default=['BM25', 'DirichletLM'], required=False)
     parser.add_argument('--oracle-dataset-ids', type=str, help='allowed dataset ids', nargs='+', required=True)
@@ -89,7 +90,7 @@ def build_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset):
     
     print(f'Have {len(additional_docs)} documents for reformulation.')
 
-    iter_indexer = pt.IterDictIndexer("/tmp/reformulation-index", meta={'docno': 50, 'text': 4096}, overwrite=True)
+    iter_indexer = pt.IterDictIndexer(f"/tmp/{randint(0,1000000000)}/reformulation-index", meta={'docno': 50, 'text': 4096}, overwrite=True)
     return iter_indexer.index(tqdm(docs_for_reformulation + additional_docs, 'Index'))
 
 def get_oracle_retrieval_results(topics, oracle_index, overlapping_queries):
@@ -110,6 +111,13 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
         for fb_term in fb_terms:
             for fb_doc in fb_docs:
                 print(f'Run RM3 on {wmodel} {fb_term} {fb_doc}')
+                rm3_query_terms = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term)
+                rm3_query_terms = rm3_query_terms(topics)
+
+                for _, i in rm3_query_terms.iterrows():
+                    print(i.to_dict())
+                raise ValueError('foo')
+
 
                 rm3_keyquery_bm25 = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term) >> pt.BatchRetrieve(index, wmodel=wmodel)
 
@@ -132,7 +140,7 @@ if __name__ == '__main__':
     ensure_pyterrier_is_loaded()
     import pyterrier as pt
 
-    tira = Client()
+    tira = Client('https://api.tira.io')
 
     pt_dataset = pt.get_dataset(f'irds:ir-benchmarks/{args.input_dataset}')
     oracle_index = load_oracle_index(args.query_document_pairs, args.oracle_dataset_ids)
