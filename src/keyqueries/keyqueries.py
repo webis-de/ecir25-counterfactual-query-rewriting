@@ -77,7 +77,7 @@ def all_expanded_queries(query, min_length):
 def find_best_expansion(oracle_retrieval_results, query, wmodel, index):
     qrels = []
 
-    for _, i in oracle_retrieval_results.iterrows():
+    for _, i in oracle_retrieval_results(pd.DataFrame([query.to_dict()]).iterrows():
         if str(i['qid']) == str(query['qid']):
             qrels += [{'qid': '1', 'docno': i['docno'], 'relevance': i['relevance']}]
 
