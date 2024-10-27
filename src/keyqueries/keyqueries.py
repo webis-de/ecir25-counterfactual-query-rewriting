@@ -8,6 +8,7 @@ from tqdm import tqdm
 from random import randint
 from pathlib import Path
 from ir_measures import NumRet
+import os
 
 
 def __normalize_queries(q):
@@ -38,10 +39,10 @@ def parse_args():
     parser.add_argument('--input-dataset', type=str, help='Input file', default='cranfield-20230107-training')
     parser.add_argument('--output-dir', type=str, help='Output file', required=True)
     parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.parent.parent.resolve() / 'data' / 'input-data-for-keyqueries.jsonl.gz').absolute()), required=False)
-    parser.add_argument('--fb-terms', type=list, help='fb_terms passed to pyterrier', nargs='+', default=[10, 20, 30], required=False)
+    parser.add_argument('--fb-terms', type=list, help='fb_terms passed to pyterrier', nargs='+', default=[10], required=False)
     parser.add_argument('--w-models', type=list, help='weighting models passed to pyterrier', nargs='+', default=['BM25', 'DirichletLM'], required=False)
     parser.add_argument('--oracle-dataset-ids', type=str, help='allowed dataset ids', nargs='+', required=True)
-    parser.add_argument('--fb-docs', type=list, help='fb_docs passed to pyterrier', nargs='+', default=[5, 10], required=False)
+    parser.add_argument('--fb-docs', type=list, help='fb_docs passed to pyterrier', nargs='+', default=[5], required=False)
     parser.add_argument('--first-stage-top-k', type=int, help='top-k documents used for query reformulation', default=900, required=False)
     return parser.parse_args()
 
@@ -68,41 +69,51 @@ def all_expanded_queries(query, min_length):
     def powerset(iterable):
         s = list(iterable)
         ret = chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
-        return ['applypipeline:off ' + (' '.join(i)) for i in ret if len(i) >= min_length]
+        return ['applypipeline:off ' + (' '.join(i)) for i in ret if len(i) >= min_length and len(i) < 7]
 
     terms = [i for i in query['query'].split() if '^' in i]
+    mandatory_terms = [i for i in terms if float(i.split('^')[1]) > 0.1]
+    ret_1 = list(powerset(terms))
+    ret = []
+    for i in ret_1:
+        add = True
+        for mandatory_term in mandatory_terms:
+            if mandatory_term not in i:
+                add = False
+        if add:
+            ret += [i]
+    return ret
 
-    return list(powerset(terms))
 
-def find_best_expansion(oracle_retrieval_results, query, wmodel, index):
-    qrels = []
+def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_dir):
+    df_file = f'{output_dir}/{wmodel}_{query["qid"]}.jsonl.gz'
+    if not os.path.isfile(df_file):
+        qrels = []
+        for _, i in oracle_retrieval_results(pd.DataFrame([query])).iterrows():
+            if str(i['qid']) == str(query['qid']):
+                qrels += [{'qid': '1', 'docno': i['docno'], 'relevance': i['relevance']}]
 
-    for _, i in oracle_retrieval_results(pd.DataFrame([query.to_dict()]).iterrows():
-        if str(i['qid']) == str(query['qid']):
-            qrels += [{'qid': '1', 'docno': i['docno'], 'relevance': i['relevance']}]
+        qrels = pd.DataFrame(qrels)
 
-    qrels = pd.DataFrame(qrels)
+        assert len(qrels) > 0
 
-    assert len(qrels) > 0
-
-    best_query, best_score = None, None
-    for query in all_expanded_queries(query, 3):
-        topics = pd.dataFrame([{'qid': '1', 'query': query}])
+        df = []
         retriever = pt.BatchRetrieve(index, wmodel=wmodel)
-        results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet()])
-        assert len(results) == 1
-        print(results)
-        score = results.iloc[0]['ndcg_cut_10']
-        num_ret = results.iloc[0]['NumRet()']
-        if num_ret < 100:
-            continue
-        if best_score is None or score > best_score:
-            best_score = score
-            best_query = query
-        print(query, score)
-        
-    assert query is not None
-        
+        for candidate in all_expanded_queries(query, 3):
+            topics = pd.DataFrame([{'qid': '1', 'query': candidate}])
+            results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet()])
+            assert len(results) == 1
+            score = results.iloc[0]['ndcg_cut_10']
+            num_ret = results.iloc[0]['NumRet']
+            if num_ret < 100:
+               continue
+            df += [{'topic': query, 'candidate': candidate, 'ndcg_cut_10': score, 'num_ret': num_ret}]
+
+        df = pd.DataFrame(df)
+        df = df.sort_values('ndcg_cut_10', ascending=False).head(50)
+        df.to_json(df_file, lines=True, orient='records')
+
+    return pd.read_json(df_file, lines=True).iloc[0]['candidate']
 
 def build_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset):
     additional_docs = {}
@@ -155,28 +166,16 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
                 rm3_query_terms = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term)
                 rm3_query_terms = rm3_query_terms(topics)
                 
+                reformulated_topics = []
+                for _, i in tqdm(list(rm3_query_terms.iterrows()), 'queries'):
+                    i = i.to_dict()
+                    reformulated_topic = find_best_expansion(oracle_retrieval_results, i, wmodel, reformulation_index, out_dir)
+                    i['query'] = reformulated_topic
+                    reformulated_topics += [i]
 
-                for _, i in rm3_query_terms.iterrows():
-                    print(i.to_dict())
-                    find_best_expansion(oracle_retrieval_results, i, wmodel, reformulation_index)
-                raise ValueError('foo')
+                retriever = pt.BatchRetrieve(index, wmodel=wmodel)
 
-
-                rm3_keyquery_bm25 = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term) >> pt.BatchRetrieve(index, wmodel=wmodel)
-
-                rm3_keyquery_bm25(topics).to_json(f'{out_dir}/rm3_{wmodel}_{fb_term}_{fb_doc}.jsonl.gz', index=False, lines=True, orient='records')
-
-                print(f'Run BO1 on {wmodel} {fb_term} {fb_doc}')
-
-                bo1_keyquery_bm25 = oracle_retrieval_results >> pt.rewrite.Bo1QueryExpansion(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term) >> pt.BatchRetrieve(index, wmodel="BM25")
-
-                bo1_keyquery_bm25(topics).to_json(f'{out_dir}/bo1_{wmodel}_{fb_term}_{fb_doc}.jsonl.gz', index=False, lines=True, orient='records')
-
-                print(f'Run KL on {wmodel} {fb_term} {fb_doc}')
-
-                kl_keyquery_bm25 = oracle_retrieval_results >> pt.rewrite.KLQueryExpansion(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term) >> pt.BatchRetrieve(index, wmodel="BM25")
-
-                kl_keyquery_bm25(topics).to_json(f'{out_dir}/kl_{wmodel}_{fb_term}_{fb_doc}.jsonl.gz', index=False, lines=True, orient='records')
+                rm3_keyquery_bm25(pd.DataFrame(reformulated_topics)).to_json(f'{out_dir}/{wmodel}_{fb_term}_{fb_doc}.jsonl.gz', index=False, lines=True, orient='records')
 
 if __name__ == '__main__':
     args = parse_args()
