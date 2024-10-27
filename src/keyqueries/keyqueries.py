@@ -7,6 +7,7 @@ from tira.rest_api_client import Client
 from tqdm import tqdm
 from random import randint
 from pathlib import Path
+from ir_measures import NumRet
 
 
 def __normalize_queries(q):
@@ -62,6 +63,46 @@ def get_overlapping_topics(pt_dataset, overlapping_queries):
     print(f'Done. Found {len(topics)} overlapping topics.')
     return topics
 
+def all_expanded_queries(query, min_length):
+    from itertools import chain, combinations
+    def powerset(iterable):
+        s = list(iterable)
+        ret = chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
+        return ['applypipeline:off ' + (' '.join(i)) for i in ret if len(i) >= min_length]
+
+    terms = [i for i in query['query'].split() if '^' in i]
+
+    return list(powerset(terms))
+
+def find_best_expansion(oracle_retrieval_results, query, wmodel, index):
+    qrels = []
+
+    for _, i in oracle_retrieval_results.iterrows():
+        if str(i['qid']) == str(query['qid']):
+            qrels += [{'qid': '1', 'docno': i['docno'], 'relevance': i['relevance']}]
+
+    qrels = pd.DataFrame(qrels)
+
+    assert len(qrels) > 0
+
+    best_query, best_score = None, None
+    for query in all_expanded_queries(query, 3):
+        topics = pd.dataFrame([{'qid': '1', 'query': query}])
+        retriever = pt.BatchRetrieve(index, wmodel=wmodel)
+        results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet()])
+        assert len(results) == 1
+        print(results)
+        score = results.iloc[0]['ndcg_cut_10']
+        num_ret = results.iloc[0]['NumRet()']
+        if num_ret < 100:
+            continue
+        if best_score is None or score > best_score:
+            best_score = score
+            best_query = query
+        print(query, score)
+        
+    assert query is not None
+        
 
 def build_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset):
     additional_docs = {}
@@ -100,7 +141,7 @@ def get_oracle_retrieval_results(topics, oracle_index, overlapping_queries):
         r = 0
         for hit in sorted(oracle_index[__normalize_queries(overlapping_queries[topic['qid']])], key=lambda x: x['relevance'], reverse=True):
             r += 1
-            ret += [{'qid': topic['qid'], 'query': topic['query'], 'docno': 'ADD_' + hit['doc_id'], 'rank': r, 'score': 100-r, 'run_id': 'oracle'}]
+            ret += [{'qid': topic['qid'], 'query': topic['query'], 'docno': 'ADD_' + hit['doc_id'], 'rank': r, 'score': 100-r, 'run_id': 'oracle', 'relevance': hit['relevance']}]
 
     ret = pd.DataFrame(ret)
     return pt.transformer.get_transformer(ret)
@@ -113,9 +154,11 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
                 print(f'Run RM3 on {wmodel} {fb_term} {fb_doc}')
                 rm3_query_terms = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term)
                 rm3_query_terms = rm3_query_terms(topics)
+                
 
                 for _, i in rm3_query_terms.iterrows():
                     print(i.to_dict())
+                    find_best_expansion(oracle_retrieval_results, i, wmodel, reformulation_index)
                 raise ValueError('foo')
 
 
