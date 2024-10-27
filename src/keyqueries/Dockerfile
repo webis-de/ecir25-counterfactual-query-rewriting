@@ -6,7 +6,7 @@ FROM webis/ir-lab-wise-2023:0.0.4
 RUN pip3 uninstall -y tira \
 	&& pip3 install git+https://github.com/tira-io/tira.git@development#\&subdirectory=python-client
 
-ADD keyqueries/keyqueries.py oracle-indexing/oracle-index.jsonl.gz /
+ADD src/keyqueries/keyqueries.py data/input-data-for-keyqueries.jsonl.gz /
 
 ENTRYPOINT [ "/keyqueries.py", "--input-dataset",  "$inputDataset", "--output-dir", "$outputDir" ]
 

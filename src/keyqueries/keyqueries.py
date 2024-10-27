@@ -35,7 +35,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Construct neighbors')
     parser.add_argument('--input-dataset', type=str, help='Input file', default='cranfield-20230107-training')
     parser.add_argument('--output-dir', type=str, help='Output file', required=True)
-    parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.resolve() / 'oracle-index.jsonl.gz').absolute()), required=False)
+    parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.parent.resolve() / 'input-data-for-keyqueries.jsonl.gz').absolute()), required=False)
     parser.add_argument('--fb-terms', type=list, help='fb_terms passed to pyterrier', nargs='+', default=[10, 20, 30], required=False)
     parser.add_argument('--w-models', type=list, help='weighting models passed to pyterrier', nargs='+', default=['BM25', 'DirichletLM'], required=False)
     parser.add_argument('--oracle-dataset-ids', type=str, help='allowed dataset ids', nargs='+', required=True)
