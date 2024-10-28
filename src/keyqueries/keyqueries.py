@@ -14,7 +14,7 @@ import os
 
 def all_splits(output_dir):
     splits = json.load(open('../../data/splits.json'))
-    ret = {}
+    ret = {'no-split': set([])}
     for split, groups in splits[output_dir].items():
         ret[split] = set(groups['test'])
     return ret
@@ -170,7 +170,7 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
     for wmodel in weighting_models:
         for fb_term in fb_terms:
             for fb_doc in fb_docs:
-                print(f'Run RM3 on {wmodel} {fb_term} {fb_doc}')
+                print(f'Run keyqueries on {wmodel} {fb_term} {fb_doc}')
                 rm3_query_terms = oracle_retrieval_results >> pt.rewrite.RM3(reformulation_index, fb_docs=fb_doc, fb_terms=fb_term)
                 rm3_query_terms = rm3_query_terms(topics)
                 
