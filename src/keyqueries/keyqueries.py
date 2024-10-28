@@ -193,6 +193,8 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
                         results_for_split += [i.to_dict()]
 
                     results_for_split = pd.DataFrame(results_for_split)
+                    results_for_split['Q0'] = 0
+                    results_for_split['system'] = f'{wmodel}-keyquery'
                     results_for_split = results_for_split.copy().sort_values(["qid", "score", "docno"], ascending=[True, False, False]).reset_index()
 
                     results_for_split[["qid", "Q0", "docno", "rank", "score", "system"]].to_csv(f'{out_dir}/{wmodel}-split-{split}.run.gz', sep=" ", header=False, index=False)
