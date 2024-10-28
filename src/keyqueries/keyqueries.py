@@ -8,8 +8,16 @@ from tqdm import tqdm
 from random import randint
 from pathlib import Path
 from ir_measures import NumRet
+import json
 import os
 
+
+def all_splits(output_dir):
+    splits = json.load(open('../../data/splits.json'))
+    ret = {}
+    for split, groups in splits[output_dir].items():
+        ret[split] = set(groups['test'])
+    return ret
 
 def __normalize_queries(q):
     return q.lower().strip()
@@ -173,9 +181,21 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
                     i['query'] = reformulated_topic
                     reformulated_topics += [i]
 
+                reformulated_topics = pd.DataFrame(reformulated_topics)
                 retriever = pt.BatchRetrieve(index, wmodel=wmodel)
+                retrieval_results = retriever(reformulated_topics)
 
-                rm3_keyquery_bm25(pd.DataFrame(reformulated_topics)).to_json(f'{out_dir}/{wmodel}_{fb_term}_{fb_doc}.jsonl.gz', index=False, lines=True, orient='records')
+                for split, docs_to_skip in all_splits(out_dir).items():
+                    results_for_split = []
+                    for _, i in retrieval_results.iterrows():
+                        if i['docno'] in docs_to_skip:
+                            continue
+                        results_for_split += [i.to_dict()]
+
+                    results_for_split = pd.DataFrame(results_for_split)
+                    results_for_split = results_for_split.copy().sort_values(["qid", "score", "docno"], ascending=[True, False, False]).reset_index()
+
+                    results_for_split[["qid", "Q0", "docno", "rank", "score", "system"]].to_csv(f'{out_dir}/{wmodel}-split-{split}.run.gz', sep=" ", header=False, index=False)
 
 if __name__ == '__main__':
     args = parse_args()
