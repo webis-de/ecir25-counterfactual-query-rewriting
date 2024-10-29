@@ -1,32 +1,35 @@
+
 \begin{table}[t]%
-\small%
-\centering%
-\renewcommand{\tabcolsep}{4pt}%
-\caption{{\color{red}TODO: This table is from CLEF22~\cite{froebe:2022d}, I would like to abstract from the framework by Keller et al.~\cite{keller:2024} to show simple examples for the classes that we look into}. Examples of differences between versions of positive training instances from MS~MARCO Version~1 (crawled in 2018) and Version~2~(2021). Text fragments highlighted in blue italics indicate relevance (erroneous versions have no blue italics).}%
-\label{table-examples}%
-\begin{tabular}[t]{@{}llll@{}}
-\toprule
-{\bfseries Query} & \multicolumn{2}{@{}c@{}}{\bfseries Relevant Document} & {\bfseries Comment}\\
-\cmidrule(l@{\tabcolsep}r@{\tabcolsep}){2-3}
+    \small%
+    \centering%
+    \renewcommand{\tabcolsep}{4pt}%
+    \caption{}%
+    \label{table-examples-2}%
+    \begin{tabular}[t]{@{}lllll@{}}
+    \toprule
+    {\bfseries Query} & \multicolumn{2}{@{}c@{}}{\bfseries Document} & {\bfseries Comment} & {\bfseries Type}\\
+    \cmidrule(l@{\tabcolsep}r@{\tabcolsep}){2-3}
+    
+    & Version~1 ($t_0$) & Version~2 ($t_1$)\\
+    \midrule
+    
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website initially\\ crawled}} &  \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{CREATE}}}\\\\\\
+    \midrule
 
-& Version~1 (2018) & Version~2 (2021)\\
-\midrule
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website removed \\ from index}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{DELETE}}}\\\\\\
+    \midrule
 
-\multirow{3}{*}{\footnotesize \shortstack[l]{\\ what are deposit\\ solutions banking}}
-& \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Oops! There was a problem!\\ We had an unexpected prob-\\ lem processing your request.\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Crawling\\ error\\ in V1}} \\\\\\
-\midrule
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website content changed \\ relevance stays the same}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{UPDATE}}}\\\\\\
+    \midrule
 
-\multirow{3}{*}{\footnotesize \shortstack[l]{\\ what are yel-\\low roses mean}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Meaning Of A Yellow Rose\\ \ldots\ a yellow rose {\color{blue} \emph{stands for}}\\ {\color{blue} \emph{joy and happiness}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ 20 Best Knockout\\ Roses To Make Your\\ Garden Outstanding}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Redirect\\ in V2}} \\\\\\
-\midrule
+    \multirow{3}{*}{\footnotesize \shortstack[l]{Query}}
+    & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}\\ {\color{blue} \emph{Profile}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ {\color{blue} \emph{Deposit Solutions}}\\ Crunchbase {\color{blue} \emph{Company}}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{Website content changed \\ relevance changed}}  &   \multirow{3}{*}{\footnotesize \shortstack[l]{\texttt{UPDATE}}}\\\\\\
+    \midrule
 
+    \bottomrule
 
-\multirow{3}{*}{\footnotesize \shortstack[l]{\\ how much mag-\\nesium in kid-\\ney beans}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Kidney Beans \ldots\ {\color{blue} \emph{a cup}}\\ {\color{blue} \emph{of kidney beans contains}} \\ {\color{blue} \emph{70 mg of magnesium}} \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Magnesium Grocery\\ List. Bring this list \\ to the store to \ldots\vspace*{-.1cm}}} & \multirow{3}{*}{\footnotesize \shortstack[l]{\\ Content\\ change\\ in V2}} \\\\\\
-\midrule
-\multicolumn{3}{l}{Intent Change}\\
-\midrule
-
-\multicolumn{3}{l}{soccer em (queried in 2024 vs 2020}\\
-
-\bottomrule
 \end{tabular}
-\end{table}  
+\end{table}

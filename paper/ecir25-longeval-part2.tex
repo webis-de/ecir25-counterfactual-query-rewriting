@@ -1,22 +1,10 @@
 \section{Related Work}
 
-
-\begin{table}
-    \caption{Taxonomy reproduced and adapted from~\cite{keller:2024}.}
-    \label{tab:CRUD}
-    \begin{tabularx}{\linewidth}{l | X | X | X}
-        \toprule
-        {}       & \texttt{CREATE}          & \texttt{UPDATE}                 & \texttt{DELETE} \\ \midrule
-        Document & New unseen documents     & Known URL but changed website   & URL not in sub-collection anymore              \\\midrule
-        Topic    & New query                & Fixed typos, translation or changed accents marks                               & Query not in sub-collection anymore \\\midrule
-        Qrel     & New relevance label      & Known document query pair but changed relevance & Relevance became unknown   \\\bottomrule
-    \end{tabularx}
-\end{table}
-
 \paragraph{Temporal Information Retrieval}
 
 Changes in evolving test collections are classified on a high level along theire main components, the documents, topics, and qrels, and the create, update, and delete operation of persistent storage by Keller et al. in~\cite{keller:2024}. Based on this classification schema different retrieval scenarios emerge that can be quantified on different levels and directly related to challenges IR systems face.
 
+{\color{red} describe that we re-use and adapt the taxonomy from~\cite{keller:2024}}
 
 While the LongEval dataset contains changes in all components of all types, the investigated approaches are mainly concerned with changing documents that may also affect the relevance label.
 
