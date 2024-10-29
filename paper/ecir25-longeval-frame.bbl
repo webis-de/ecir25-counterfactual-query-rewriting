@@ -13,7 +13,7 @@ Adar, E., Teevan, J., Dumais, S.T., Elsas, J.L.: The web changes everything:
   understanding the dynamics of web content. In: {WSDM}. pp. 282--291. {ACM}
   (2009)
 
-\bibitem{DBLP:conf/clef/AlkhalifaBBCDEA23}
+\bibitem{alkhalifa:2023}
 Alkhalifa, R., Bilal, I.M., Borkakoty, H., Camacho{-}Collados, J., Deveaud, R.,
   El{-}Ebshihy, A., Anke, L.E., S{\'{a}}ez, G.N.G., Galusc{\'{a}}kov{\'{a}},
   P., Goeuriot, L., Kochkina, E., Liakata, M., Loureiro, D., Mulhem, P., Piroi,
@@ -103,6 +103,15 @@ Fr{\"o}be, M., Bevendorff, J., Gienapp, L., V{\"o}lske, M., Stein, B.,
 Fr{\"o}be, M., Schmidt, E.O., Hagen, M.: Efficient query obfuscation with
   keyqueries. In: IEEE/WIC/ACM International Conference on Web Intelligence and
   Intelligent Agent Technology. pp. 154--161 (2021)
+
+\bibitem{galuscakova:2023}
+Galusc{\'{a}}kov{\'{a}}, P., Deveaud, R., S{\'{a}}ez, G.G., Mulhem, P.,
+  Goeuriot, L., Piroi, F., Popel, M.: Longeval-retrieval: French-english
+  dynamic test collection for continuous web search evaluation. In: Chen, H.,
+  Duh, W.E., Huang, H., Kato, M.P., Mothe, J., Poblete, B. (eds.) Proceedings
+  of the 46th International {ACM} {SIGIR} Conference on Research and
+  Development in Information Retrieval, {SIGIR} 2023, Taipei, Taiwan, July
+  23-27, 2023. pp. 3086--3094. {ACM} (2023). \doi{10.1145/3539618.3591921}
 
 \bibitem{gollub:2013a}
 Gollub, T., Hagen, M., Michel, M., Stein, B.: {From Keywords to Keyqueries:

@@ -3,48 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ecir25-longeval-frame.aux
 The style file: splncs04.bst
 Database file #1: ecir25-longeval-lit.bib
-Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "DBLP:conf/clef/AlkhalifaBBCDEA23"
 Warning--I didn't find a database entry for "froebe-mis:2022"
 Warning--missing publisher in robertson:1994
-You've used 30 entries,
+You've used 31 entries,
             2850 wiz_defined-function locations,
-            802 strings with 13399 characters,
-and the built_in function-call counts, 23384 in all, are:
-= -- 1860
-> -- 1017
-< -- 34
-+ -- 402
-- -- 368
-* -- 1604
-:= -- 2990
-add.period$ -- 81
-call.type$ -- 30
-change.case$ -- 285
+            810 strings with 14004 characters,
+and the built_in function-call counts, 24426 in all, are:
+= -- 1940
+> -- 1073
+< -- 35
++ -- 423
+- -- 388
+* -- 1679
+:= -- 3125
+add.period$ -- 85
+call.type$ -- 31
+change.case$ -- 297
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 1949
-empty$ -- 1923
-format.name$ -- 404
-if$ -- 5063
+cite$ -- 32
+duplicate$ -- 2031
+empty$ -- 2000
+format.name$ -- 426
+if$ -- 5286
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 451
-newline$ -- 96
-num.names$ -- 80
-pop$ -- 848
+int.to.str$ -- 31
+missing$ -- 472
+newline$ -- 99
+num.names$ -- 84
+pop$ -- 885
 preamble$ -- 1
-purify$ -- 217
+purify$ -- 226
 quote$ -- 0
-skip$ -- 543
+skip$ -- 566
 stack$ -- 0
-substring$ -- 1196
-swap$ -- 1176
-text.length$ -- 34
+substring$ -- 1249
+swap$ -- 1231
+text.length$ -- 35
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 112
+type$ -- 116
 warning$ -- 1
-while$ -- 173
-width$ -- 32
-write$ -- 353
+while$ -- 180
+width$ -- 33
+write$ -- 366
 (There were 3 warnings)
