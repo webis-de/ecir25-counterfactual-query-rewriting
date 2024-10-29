@@ -1,23 +1,12 @@
-\section{XY for Previously seen Queries}
+\section{Query Rewriting on Historical Relevance Feedback}
 
-Our approach.
+We present three approaches that incorporate historical relevance feedback for previously seen queries by increasing maturity, from \Ni boosting (can not generalize), over \Nii relevance feedback (might underfit), towards \Niii keyqueries (trade-off under- vs. overfitting). These three approaches are frequently applied in diverse retrieval scenarios (see Section~\ref{sec:related-work}), but we first transfer them to a scenario with historical relevance feedback, thereby substantially enriching the domains in which they can be applied.
 
-We noticed that queries overlap over different time slots, and in case their intent stays the same, we aim to transfer their relevance information to the new time slots. Consecutively, for those queries we know what documents were clicked a few months ago. We decided to use this feedback and query expansion with the BO1 model~\cite{amati:2003} to create keyqueries and use the same approach as \cite{froebe-mis:2022}. Thereby, we use BO1 to obtain candidate terms for query terms, as pilot experiments showed that BO1 expansion terms yield higher effectiveness than RM3~\cite{jaleel:2004} expansions. We inserted the clicked documents into the current corpus and reformulated the queries with the BO1 model until those documents were in the top positions. After that we removed old documents from the ranking. This implementation of the keyquery concept is not the most effective one, more effective approaches that leverage a generate-and-test paradigm~\cite{froebe:2021c} exist and are interesting directions for future work (i.e., explicitly generating many variants and selecting the variants that are highly effective).
+\paragraph{Boosting Previously Relevant Documents.} The qrel boost method directly boosts query document pairs of BM25~\cite{robertson:1994} that are known to be relevant from past points in time up based on a weighting factor $\lambda^2$ and all known and not relevant query document pairs down by $(1-\lambda)^2$. Additionally, since the LongEval test collection has graded relevance labels, the score of all highly relevant query document pairs is additionally multiplied by $\mu$. If more than one previous point in time is used for the boosting, the score of a query document pair is repeatedly multiplied by the boost. While this approach appears to be highly effective~\cite{alkhalifa:2024,keller:2024b}, it can not generalize to new documents and is therefore not effective for the cross-validation and only included as an upper bound naive baseline.
 
-Short analysis: how much did documents change? We use CopyCat~\cite{froebe:2021a}, as it was previously used to deduplicate web crawls, e.g., the ClueWebs, in default settings. ToDo: add motivation for measure and containment conceptually implemented by the S3 score.
 
-\begin{figure}[t]
-    \begin{minipage}{.49\textwidth}
-        \includegraphics[width=\textwidth]{query-overlap}
-        \vspace{-4ex}
-        \caption{Frequency of queries and points in time.}
-        \label{fig:query-overlap}
-    \end{minipage}
-    \hfill    
-    \begin{minipage}{.49\textwidth}
-        \includegraphics[width=\textwidth]{document-similarities}
-        \vspace{-4ex}
-        \caption{S$_{3}$ Similarities of documents with overlapping URLs as eCDF plot.}
-        \label{fig:document-similarities}
-    \end{minipage}
-\end{figure}
+\paragraph{Previously Relevant Documents as Explicit Relevance Feedback.} Improving on this baseline, a tf-idf query expansion based on previously relevant documents wes tested. Instead of directly boosting known relevant query document pairs, the top 10 tf-idf terms from the relevant documents are used to expand the original query. The expanded query is then used to query the corpus with BM25. Like the qrel boost approach before, the tf-idf query expansion also only affects topics that are already known but can generalize to new documents.
+
+
+\paragraph{Keyqueries for Previously Relevant Documents.}
+
