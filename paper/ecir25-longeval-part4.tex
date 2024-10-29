@@ -21,15 +21,7 @@ Improving on this baseline, a tf-idf query expansion based on previously relevan
 \subsection{Natural Evolving Test Collection}
 In this evaluation scenario, the effectiveness is assessed in a life-like setting where the overlap naturally occurs. Thus, this setting can describe the effectiveness as it may occur in a web search scenario. Currently, the test collection covers six pints in time with, on average, 1.77 million documents. For each point in time between 407 and 1518 queries are logged and on average, 12874 qrels are constructed through the simplified Dynamic Bayesian Network (sDBN) Click Model~\cite{chapelle:2009}. The topic overlap between points in time is displayed in Figure~\ref{fig:query-overlap}, indicating that less than a third of the queries are logged repeatedly.
 
-
-\begin{table}[t]%
-    \small%
-    \centering%
-    \renewcommand{\tabcolsep}{4pt}%
-    \caption{ }%
-    \label{tab:table-results}%
-    \input{table-results.tex}
-\end{table}  
+\input{table-results}
 
 \subsection{Temporal Per Topic Cross Validation}
 To emphasize the actual effect of the approaches and how well they generalize to new documents, we evaluated them in a cross-validation setting. For each topic at each point in time, the relevant documents are split into $k$ folds. For each fold, only the test documents are indexed and retrieved. The different approaches can then use the documents in the train split if they were already present at the previous points in time. Since some documents can be relevant for multiple topics, the train test splits must be updated after creation to avoid duplicates. This makes the splits less random and differently large but should be neglectable for this initial evaluation.
