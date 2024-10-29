@@ -64,6 +64,14 @@ Fr{\"o}be, M., Schmidt, E.O., Hagen, M.: Efficient query obfuscation with
   keyqueries. In: IEEE/WIC/ACM International Conference on Web Intelligence and
   Intelligent Agent Technology. pp. 154--161 (2021)
 
+\bibitem{gollub:2013a}
+Gollub, T., Hagen, M., Michel, M., Stein, B.: {From Keywords to Keyqueries:
+  Content Descriptors for the Web}. In: Gurrin, C., Jones, G., Kelly, D.,
+  Kruschwitz, U., {de Rijke}, M., Sakai, T., Sheridan, P. (eds.) 36th
+  International ACM Conference on Research and Development in Information
+  Retrieval (SIGIR 2013). pp. 981--984. ACM (Jul 2013).
+  \doi{10.1145/2484028.2484181}
+
 \bibitem{keller:2024}
 Keller, J., Breuer, T., Schaer, P.: Evaluation of temporal change in {IR} test
   collections. In: Oosterhuis, H., Bast, H., Xiong, C. (eds.) Proceedings of
