@@ -1,26 +1,18 @@
 \section{Related Work}
+\paragraph{Web Dynamics.} % Web page changes every 90 days on average...
+Temporal dynamics in web search are an established research topic. Websites change constantly; for example Adar et al.~\cite{DBLP:conf/wsdm/AdarTDE09}, found as early as 2009 that ``a large portion of pages changing more than houherly.'' Thereby, websites are often only relevant for a limited time~\cite{DBLP:conf/sigir/TikhonovBBOKG13}. This relates directly to the observation that many queries are not unique but issued frequently~\cite{DBLP:conf/sigir/Dumais14,DBLP:journals/sigir/SilversteinHMM99}. Even the same users tend to repeat the same queries at different points in time~\cite{DBLP:conf/wsdm/TylerT10}.
 
 \paragraph{Temporal Information Retrieval}
-
-Changes in evolving test collections are classified on a high level along theire main components, the documents, topics, and qrels, and the create, update, and delete operation of persistent storage by Keller et al. in~\cite{keller:2024}. Based on this classification schema different retrieval scenarios emerge that can be quantified on different levels and directly related to challenges IR systems face.
-
-{\color{red} describe that we re-use and adapt the taxonomy from~\cite{keller:2024}}
-
-While the LongEval dataset contains changes in all components of all types, the investigated approaches are mainly concerned with changing documents that may also affect the relevance label.
-
-% Table 2 refers to the scenario of D'TQ -> documents changes but relevance stayed the same
-
-
-Things that sound related but are not yet checked/incorporated are appended to this sentence~\cite{li:2022}.
-
-Integrate prior work into the topology by Keller et al.~\cite{keller:2024}. E.g., transfer of relevance labels to (near-)duplicate documents~\cite{froebe:2021a}, documents that change their content and therefore might be not relevant anymore~\cite{froebe:2022d}, etc (Harrie Oosterhuis likely has much on this).
-
-
-
-\paragraph{Web Dynamics.} Web page changes every 90 days on average...
+These observations motivate Temporal Information Retrieval (TIR) as a research area with the overmost goal to factor temporal information to improve the ranking quality~\cite{DBLP:journals/ftir/KanhabuaBN15,DBLP:journals/csur/CamposDJJ14}. For example, Elsas and Dumais propose a ranking algorithm that incormporates temporal patterns for term weights~\cite{DBLP:conf/wsdm/ElsasD10}. Although the proposed approaches take place in a temporal setting, they differ from TIR since no temporal features are considered directly. Instead, the opposite, counterfactually, the elapsed time between searches or any changes in documents are ignored, which makes the approach effective yet accessible.
 
 \paragraph{Caching in IR.}
+Tangental to TIR, caching in IR is also concerned with changes in documents and queries but rather motivated by efficiency~\cite{DBLP:conf/www/CambazogluJPBCLB10,DBLP:conf/sigir/Baeza-YatesGJMPS07}. Since a large portion of queries are issued more than once, caching the results can save time and computation at the cost of recency.
 
 
 \paragraph{Query Rewriting with Keyqueries.} {\color{red} Maik.}
+Things that sound related but are not yet checked/incorporated are appended to this sentence~\cite{li:2022}.
 
+\paragraph{Evaluations in Dynamic Settings}
+While it is well known that the described dynamics can have a strong influence on the effectiveness of IR systems, the temporal dimension is rarely considered during evaluation. Soboroff~\cite{DBLP:conf/sigir/Soboroff06} initially investigated how temporal dynamics influence test collection evaluations and hypothesized how they could be maintained. Following this line, the LongEval shared task~\cite{DBLP:conf/clef/AlkhalifaBDEAFG24,DBLP:conf/clef/AlkhalifaBBCDEA23} provides a test bed of an evolving web search scenario with a test collection that covers a time frame of over a year in multiple snapshots.
+
+Recently, changes in evolving test collections have been classified on a high level along their main components, the documents, topics, and qrels, and the create, update, and delete operation of persistent storage by Keller et al. in~\cite{keller:2024}. While the LongEval dataset contains changes in all types of components, the approaches investigated in this study are mainly concerned with changing documents and ignore, counterfactually, changes in the relevance label.
