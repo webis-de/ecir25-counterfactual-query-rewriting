@@ -17,7 +17,7 @@ Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink,
   Galusc{\'{a}}kov{\'{a}}, P., de~Herrera, A.G.S. (eds.) Working Notes of the
   Conference and Labs of the Evaluation Forum {(CLEF} 2024), Grenoble, France,
   9-12 September, 2024. {CEUR} Workshop Proceedings, vol.~3740, pp. 2267--2289.
-  CEUR-WS.org (2024), \url{https://ceur-ws.org/Vol-3740/paper-213.pdf}
+  CEUR-WS.org (2024)
 
 \bibitem{amati:2003}
 Amati, G.: Divergence from randomness. (2003)
@@ -28,6 +28,12 @@ Chapelle, O., Zhang, Y.: A dynamic bayesian network click model for web search
   Proceedings of the 18th International Conference on World Wide Web, {WWW}
   2009, Madrid, Spain, April 20-24, 2009. pp. 1--10. {ACM} (2009).
   \doi{10.1145/1526709.1526711}, \url{https://doi.org/10.1145/1526709.1526711}
+
+\bibitem{chuklin:2015}
+Chuklin, A., Markov, I., de~Rijke, M.: Click Models for Web Search. Synthesis
+  Lectures on Information Concepts, Retrieval, and Services, Morgan {\&}
+  Claypool Publishers (2015). \doi{10.2200/S00654ED1V01Y201507ICR043},
+  \url{https://doi.org/10.2200/S00654ED1V01Y201507ICR043}
 
 \bibitem{froebe:2022d}
 Fr{\"o}be, M., Akiki, C., Potthast, M., Hagen, M.: Noise-reduction for
@@ -80,6 +86,16 @@ Li, S., Lv, F., Jin, T., Li, G., Zheng, Y., Zhuang, T., Liu, Q., Zeng, X.,
   Information {\&} Knowledge Management, Atlanta, GA, USA, October 17-21, 2022.
   pp. 3262--3271. {ACM} (2022). \doi{10.1145/3511808.3557068},
   \url{https://doi.org/10.1145/3511808.3557068}
+
+\bibitem{lin:2021}
+Lin, J., Nogueira, R.F., Yates, A.: Pretrained Transformers for Text Ranking:
+  {BERT} and Beyond. Synthesis Lectures on Human Language Technologies, Morgan
+  {\&} Claypool Publishers (2021). \doi{10.2200/S01123ED1V01Y202108HLT053}
+
+\bibitem{liu:2011}
+Liu, T.: Learning to Rank for Information Retrieval. Springer (2011).
+  \doi{10.1007/978-3-642-14267-3},
+  \url{https://doi.org/10.1007/978-3-642-14267-3}
 
 \bibitem{robertson:1994}
 Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.:
