@@ -26,11 +26,4 @@ In this evaluation scenario, the effectiveness is assessed in a life-like settin
 \subsection{Temporal Per Topic Cross Validation}
 To emphasize the actual effect of the approaches and how well they generalize to new documents, we evaluated them in a cross-validation setting. For each topic at each point in time, the relevant documents are split into $k$ folds. For each fold, only the test documents are indexed and retrieved. The different approaches can then use the documents in the train split if they were already present at the previous points in time. Since some documents can be relevant for multiple topics, the train test splits must be updated after creation to avoid duplicates. This makes the splits less random and differently large but should be neglectable for this initial evaluation.
 
-\begin{table}[t]%
-    \small%
-    \centering%
-    \renewcommand{\tabcolsep}{4pt}%
-    \caption{ Results based}%
-    \label{tab:table-results-fold}%
-    \input{table-results-fold.tex}
-\end{table}  
+\input{table-results-fold}
