@@ -43,6 +43,8 @@ The keyqueries approach is compared to further baselines.
 
 We incorporate all our approaches into BM25~\cite{robertson:1994}.
 
+For RF, we set $k=10$.
+
 
 \subsection{Natural Evolving Test Collection}
 In this evaluation scenario, the effectiveness is assessed in a life-like setting where the overlap naturally occurs. Thus, this setting can describe the effectiveness as it may occur in a web search scenario. Currently, the test collection covers six pints in time with, on average, 1.77 million documents. For each point in time between 407 and 1518 queries are logged and on average, 12874 qrels are constructed through the simplified Dynamic Bayesian Network (sDBN) Click Model~\cite{chapelle:2009}. The topic overlap between points in time is displayed in Figure~\ref{fig:query-overlap}, indicating that less than a third of the queries are logged repeatedly.
