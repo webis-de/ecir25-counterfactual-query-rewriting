@@ -1,10 +1,13 @@
 \section{Introduction}
 
-Many of the queries a search engine receives have been seen before {\color{red}[CITATION]}. By analyzing how users interact with the displayed results for these queries, valuable relevance information can be gathered. Such signals can be used to improve the search engine's effectiveness, e.g., by constructing click models that synthesize a relevance indicator~\cite{chuklin:2015}. These synthesized labels can be used to boost documents~\cite{keller:2024b}, to train learning-to-rank models~\cite{liu:2011}, or to fine-tune transformer models~\cite{lin:2021}. While the training and fine-tuning of models often require huge amounts of labeled data, boosting also works with few labels~\cite{keller:2024b}. However, boosting might only be applied for a very short time after relevance information have been observed, as queries, documents, and relevance may evolve~\cite{keller:2024}. For instance, boosting would fails when documents are deleted or change their content so that they are not relevant to the query anymore.
+Many of the queries a search engine receives have been seen before {\color{red}[CITATION]}. By analyzing how users interact with the displayed results for these queries, valuable relevance information can be gathered. Such signals can be used to improve the search engine's effectiveness, e.g., by constructing click models that synthesize a relevance indicator~\cite{chuklin:2015}. These synthesized labels can be used to boost documents~\cite{keller:2024b}, to train learning-to-rank models~\cite{liu:2011}, or to fine-tune transformer models~\cite{lin:2021}. While the training and fine-tuning of models often require huge amounts of labeled data, boosting also works with few labels~\cite{keller:2024b}. However, boosting might only be applied for a very short time after relevance information have been observed, as queries, documents, and relevance may evolve~\cite{keller:2024}. For instance, boosting would fail when documents are deleted or change their content so that they are not relevant to the query anymore (exemplified in Table~\ref{table-examples}).
 
-To address this challenge, we explore how historical relevance feedback can be incorporated into query rewriting approaches. Incorporating the historical relevance feedback into query rewriting has the advantage that only very few feedback documents suffice (e.g., RM3~in PyTerrier~\cite{macdonald:2020} uses 3~feedback documents as default).
 
-This scenario has the advantage, that already few documents per query are enough for effective query rewriting (e.g.,  Our approaches counterfactually assume that documents that were previously relevant to a query are still part of the retrieval collection, even when they might be deleted or have changed substantially. In this scenario, a few documents are enough as to rewrite the query, and we present two approaches 
+\input{table-examples}
+
+To address this challenge, we explore how historical relevance feedback can be incorporated into query rewriting approaches. Incorporating the historical relevance feedback into query rewriting has the advantage that, anaougously to boosting, already few feedback documents suffice (e.g., RM3~in PyTerrier~\cite{macdonald:2020} uses 3~feedback documents as default). Our approaches counterfactually assume that documents that were previously relevant to a query are still part of the retrieval collection, even when they might be deleted or have changed substantially. Thereby, as long as the indent of the query does not change, our counterfactual query rewriting is robust against updates and deletions of documents, while it can generalize to newly added documents that could not obtain relevance feedback in the past as they have added only recently.
+
+In this scenario, a few documents are enough as to rewrite the query, and we present two approaches 
 
 previous relevance labels can be used for query expansion in a temporal setting. Therefore, we first describe different classes of temporal changes in the web search setting and propose to create key queries based on the previously relevant documents. {\color{red} Describe all approaches.}
 
@@ -12,4 +15,3 @@ In an initial experimental evaluation we compare the key query approach to diffe
 
 
 
-\input{table-examples}
