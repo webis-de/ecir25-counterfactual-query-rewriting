@@ -4,7 +4,7 @@
 \paragraph{Web Dynamics.}
 Temporal dynamics in web search are an established research topic. Websites change constantly; for example Adar et al.~\cite{DBLP:conf/wsdm/AdarTDE09}, found as early as 2009 that ``a large portion of pages changing more than houherly.'' Thereby, websites are often only relevant for a limited time~\cite{DBLP:conf/sigir/TikhonovBBOKG13}. This relates directly to the observation that many queries are not unique but issued frequently~\cite{DBLP:conf/sigir/Dumais14,DBLP:journals/sigir/SilversteinHMM99}. Even the same users tend to repeat the same queries at different points in time~\cite{DBLP:conf/wsdm/TylerT10}.
 
-\paragraph{Temporal Information Retrieval}
+\paragraph{Temporal Information Retrieval.}
 These observations motivate Temporal Information Retrieval (TIR) as a research area with the overmost goal to factor temporal information to improve the ranking quality~\cite{DBLP:journals/ftir/KanhabuaBN15,DBLP:journals/csur/CamposDJJ14}. For example, Elsas and Dumais propose a ranking algorithm that incormporates temporal patterns for term weights~\cite{DBLP:conf/wsdm/ElsasD10}. Although the proposed approaches take place in a temporal setting, they differ from TIR since no temporal features are considered directly. Instead, the opposite, counterfactually, the elapsed time between searches or any changes in documents are ignored, which makes the approach effective yet accessible.
 
 \paragraph{Caching in IR.}
@@ -15,7 +15,7 @@ Tangental to TIR, caching in IR is also concerned with changes in documents and 
 
 Things that sound related but are not yet checked/incorporated are appended to this sentence~\cite{li:2022}.
 
-\paragraph{Evaluations in Dynamic Settings}
+\paragraph{Evaluations in Dynamic Settings.}
 While it is well known that the described dynamics can have a strong influence on the effectiveness of IR systems, the temporal dimension is rarely considered during evaluation. Soboroff~\cite{DBLP:conf/sigir/Soboroff06} initially investigated how temporal dynamics influence test collection evaluations and hypothesized how they could be maintained. Following this line, the LongEval shared task~\cite{DBLP:conf/clef/AlkhalifaBDEAFG24,alkhalifa:2023} provides a test bed of an evolving web search scenario with a test collection that covers a time frame of over a year in multiple snapshots.
 
 Recently, changes in evolving test collections have been classified on a high level along their main components, the documents, topics, and qrels, and the create, update, and delete operation of persistent storage by Keller et al. in~\cite{keller:2024}. While the LongEval dataset contains changes in all types of components, the approaches investigated in this study are mainly concerned with changing documents and ignore, counterfactually, changes in the relevance label.
