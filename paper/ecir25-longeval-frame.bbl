@@ -8,6 +8,28 @@ Abdul-Jaleel, N., Allan, J., Croft, W.B., Diaz, F., Larkey, L., Li, X.,
   Smucker, M.D., Wade, C.: Umass at trec 2004: Novelty and hard. Computer
   Science Department Faculty Publication Series p.~189 (2004)
 
+\bibitem{DBLP:conf/wsdm/AdarTDE09}
+Adar, E., Teevan, J., Dumais, S.T., Elsas, J.L.: The web changes everything:
+  understanding the dynamics of web content. In: {WSDM}. pp. 282--291. {ACM}
+  (2009)
+
+\bibitem{DBLP:conf/clef/AlkhalifaBBCDEA23}
+Alkhalifa, R., Bilal, I.M., Borkakoty, H., Camacho{-}Collados, J., Deveaud, R.,
+  El{-}Ebshihy, A., Anke, L.E., S{\'{a}}ez, G.N.G., Galusc{\'{a}}kov{\'{a}},
+  P., Goeuriot, L., Kochkina, E., Liakata, M., Loureiro, D., Mulhem, P., Piroi,
+  F., Popel, M., Servan, C., Madabushi, H.T., Zubiaga, A.: Extended overview of
+  the {CLEF-2023} longeval lab on longitudinal evaluation of model performance.
+  In: {CLEF} (Working Notes). {CEUR} Workshop Proceedings, vol.~3497, pp.
+  2181--2203. CEUR-WS.org (2023)
+
+\bibitem{DBLP:conf/clef/AlkhalifaBDEAFG24}
+Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink,
+  T., Galusc{\'{a}}kov{\'{a}}, P., S{\'{a}}ez, G.G., Goeuriot, L., Iommi, D.,
+  Liakata, M., Madabushi, H.T., Medina{-}Alias, P., Mulhem, P., Piroi, F.,
+  Popel, M., Zubiaga, A.: Extended overview of the {CLEF} 2024 longeval lab on
+  longitudinal evaluation of model performance. In: {CLEF} (Working Notes).
+  {CEUR} Workshop Proceedings, vol.~3740, pp. 2267--2289. CEUR-WS.org (2024)
+
 \bibitem{alkhalifa:2024}
 Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink,
   T., Galusc{\'{a}}kov{\'{a}}, P., S{\'{a}}ez, G.G., Goeuriot, L., Iommi, D.,
@@ -22,6 +44,21 @@ Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink,
 \bibitem{amati:2003}
 Amati, G.: Divergence from randomness. (2003)
 
+\bibitem{DBLP:conf/sigir/Baeza-YatesGJMPS07}
+Baeza{-}Yates, R.A., Gionis, A., Junqueira, F., Murdock, V., Plachouras, V.,
+  Silvestri, F.: The impact of caching on search engines. In: {SIGIR}. pp.
+  183--190. {ACM} (2007)
+
+\bibitem{DBLP:conf/www/CambazogluJPBCLB10}
+Cambazoglu, B.B., Junqueira, F.P., Plachouras, V., Banachowski, S.A., Cui, B.,
+  Lim, S., Bridge, B.: A refreshing perspective of search engine caching. In:
+  {WWW}. pp. 181--190. {ACM} (2010)
+
+\bibitem{DBLP:journals/csur/CamposDJJ14}
+Campos, R., Dias, G., Jorge, A.M., Jatowt, A.: Survey of temporal information
+  retrieval and related applications. {ACM} Comput. Surv.  \textbf{47}(2),
+  15:1--15:41 (2014)
+
 \bibitem{chapelle:2009}
 Chapelle, O., Zhang, Y.: A dynamic bayesian network click model for web search
   ranking. In: Quemada, J., Le{\'{o}}n, G., Maarek, Y.S., Nejdl, W. (eds.)
@@ -35,16 +72,13 @@ Chuklin, A., Markov, I., de~Rijke, M.: Click Models for Web Search. Synthesis
   Claypool Publishers (2015). \doi{10.2200/S00654ED1V01Y201507ICR043},
   \url{https://doi.org/10.2200/S00654ED1V01Y201507ICR043}
 
-\bibitem{froebe:2022d}
-Fr{\"o}be, M., Akiki, C., Potthast, M., Hagen, M.: Noise-reduction for
-  automatically transferred relevance judgments. In:
-  Barr{\'{o}}n{-}Cede{\~{n}}o, A., {Da San Martino}, G., Esposti, M.D.,
-  Sebastiani, F., Macdonald, C., Pasi, G., Hanbury, A., Potthast, M., Faggioli,
-  G., Ferro, N. (eds.) Experimental {IR} Meets Multilinguality, Multimodality,
-  and Interaction. 13th International Conference of the {CLEF} Association
-  ({CLEF} 2022). Lecture Notes in Computer Science, vol. 13390, pp. 48--61.
-  Springer, Berlin Heidelberg New York (Sep 2022).
-  \doi{10.1007/978-3-031-13643-6_4}
+\bibitem{DBLP:conf/sigir/Dumais14}
+Dumais, S.T.: Putting searchers into search. In: {SIGIR}. pp.~1--2. {ACM}
+  (2014)
+
+\bibitem{DBLP:conf/wsdm/ElsasD10}
+Elsas, J.L., Dumais, S.T.: Leveraging temporal dynamics of document content in
+  relevance ranking. In: {WSDM}. pp. 1--10. {ACM} (2010)
 
 \bibitem{froebe:2021a}
 Fr{\"o}be, M., Bevendorff, J., Gienapp, L., V{\"o}lske, M., Stein, B.,
@@ -71,6 +105,11 @@ Gollub, T., Hagen, M., Michel, M., Stein, B.: {From Keywords to Keyqueries:
   International ACM Conference on Research and Development in Information
   Retrieval (SIGIR 2013). pp. 981--984. ACM (Jul 2013).
   \doi{10.1145/2484028.2484181}
+
+\bibitem{DBLP:journals/ftir/KanhabuaBN15}
+Kanhabua, N., Blanco, R., N{\o}rv{\aa}g, K.: Temporal information retrieval.
+  Found. Trends Inf. Retr.  \textbf{9}(2),  91--208 (2015).
+  \doi{10.1561/1500000043}
 
 \bibitem{keller:2024}
 Keller, J., Breuer, T., Schaer, P.: Evaluation of temporal change in {IR} test
@@ -116,5 +155,23 @@ Macdonald, C., Tonellotto, N.: Declarative experimentation in information
 \bibitem{robertson:1994}
 Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.:
   Okapi at {{TREC-3}}. (Jan 1994)
+
+\bibitem{DBLP:journals/sigir/SilversteinHMM99}
+Silverstein, C., Henzinger, M., Marais, H., Moricz, M.: Analysis of a very
+  large web search engine query log. {SIGIR} Forum  \textbf{33}(1),  6--12
+  (1999)
+
+\bibitem{DBLP:conf/sigir/Soboroff06}
+Soboroff, I.: Dynamic test collections: measuring search effectiveness on the
+  live web. In: {SIGIR}. pp. 276--283. {ACM} (2006)
+
+\bibitem{DBLP:conf/sigir/TikhonovBBOKG13}
+Tikhonov, A., Bogatyy, I., Burangulov, P., Ostroumova, L., Koshelev, V., Gusev,
+  G.: Studying page life patterns in dynamical web. In: {SIGIR}. pp. 905--908.
+  {ACM} (2013)
+
+\bibitem{DBLP:conf/wsdm/TylerT10}
+Tyler, S.K., Teevan, J.: Large scale query log analysis of re-finding. In:
+  {WSDM}. pp. 191--200. {ACM} (2010)
 
 \end{thebibliography}
