@@ -4,45 +4,45 @@ The top-level auxiliary file: ecir25-longeval-frame.aux
 The style file: splncs04.bst
 Database file #1: ecir25-longeval-lit.bib
 Warning--missing publisher in robertson:1994
-You've used 15 entries,
+You've used 16 entries,
             2850 wiz_defined-function locations,
-            701 strings with 9485 characters,
-and the built_in function-call counts, 11044 in all, are:
-= -- 843
-> -- 511
-< -- 13
-+ -- 199
-- -- 183
-* -- 771
-:= -- 1451
-add.period$ -- 37
-call.type$ -- 15
-change.case$ -- 134
+            709 strings with 9883 characters,
+and the built_in function-call counts, 11848 in all, are:
+= -- 908
+> -- 542
+< -- 14
++ -- 210
+- -- 193
+* -- 824
+:= -- 1553
+add.period$ -- 41
+call.type$ -- 16
+change.case$ -- 141
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 922
-empty$ -- 909
-format.name$ -- 203
-if$ -- 2361
+cite$ -- 17
+duplicate$ -- 992
+empty$ -- 978
+format.name$ -- 215
+if$ -- 2539
 int.to.chr$ -- 0
-int.to.str$ -- 15
-missing$ -- 220
-newline$ -- 51
-num.names$ -- 44
-pop$ -- 414
+int.to.str$ -- 16
+missing$ -- 236
+newline$ -- 54
+num.names$ -- 48
+pop$ -- 441
 preamble$ -- 1
-purify$ -- 105
+purify$ -- 109
 quote$ -- 0
-skip$ -- 238
+skip$ -- 258
 stack$ -- 0
-substring$ -- 505
-swap$ -- 541
-text.length$ -- 13
+substring$ -- 550
+swap$ -- 584
+text.length$ -- 14
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 52
+type$ -- 56
 warning$ -- 1
-while$ -- 80
-width$ -- 17
-write$ -- 179
+while$ -- 87
+width$ -- 18
+write$ -- 192
 (There was 1 warning)

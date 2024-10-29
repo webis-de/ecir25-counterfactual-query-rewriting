@@ -97,6 +97,14 @@ Liu, T.: Learning to Rank for Information Retrieval. Springer (2011).
   \doi{10.1007/978-3-642-14267-3},
   \url{https://doi.org/10.1007/978-3-642-14267-3}
 
+\bibitem{macdonald:2020}
+Macdonald, C., Tonellotto, N.: Declarative experimentation in information
+  retrieval using pyterrier. In: Balog, K., Setty, V., Lioma, C., Liu, Y.,
+  Zhang, M., Berberich, K. (eds.) {ICTIR} '20: The 2020 {ACM} {SIGIR}
+  International Conference on the Theory of Information Retrieval, Virtual
+  Event, Norway, September 14-17, 2020. pp. 161--168. {ACM} (2020).
+  \doi{10.1145/3409256.3409829}
+
 \bibitem{robertson:1994}
 Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.:
   Okapi at {{TREC-3}}. (Jan 1994)
