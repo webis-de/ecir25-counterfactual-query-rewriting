@@ -3,46 +3,48 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ecir25-longeval-frame.aux
 The style file: splncs04.bst
 Database file #1: ecir25-longeval-lit.bib
+Warning--I didn't find a database entry for ""
+Warning--I didn't find a database entry for "froebe-mis:2022"
 Warning--missing publisher in robertson:1994
-You've used 29 entries,
+You've used 30 entries,
             2850 wiz_defined-function locations,
-            786 strings with 12535 characters,
-and the built_in function-call counts, 21962 in all, are:
-= -- 1768
-> -- 939
-< -- 31
-+ -- 375
-- -- 342
-* -- 1486
-:= -- 2816
-add.period$ -- 75
-call.type$ -- 29
-change.case$ -- 276
+            802 strings with 13399 characters,
+and the built_in function-call counts, 23384 in all, are:
+= -- 1860
+> -- 1017
+< -- 34
++ -- 402
+- -- 368
+* -- 1604
+:= -- 2990
+add.period$ -- 81
+call.type$ -- 30
+change.case$ -- 285
 chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 1819
-empty$ -- 1816
-format.name$ -- 375
-if$ -- 4765
+cite$ -- 31
+duplicate$ -- 1949
+empty$ -- 1923
+format.name$ -- 404
+if$ -- 5063
 int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 414
-newline$ -- 93
-num.names$ -- 74
-pop$ -- 800
+int.to.str$ -- 30
+missing$ -- 451
+newline$ -- 96
+num.names$ -- 80
+pop$ -- 848
 preamble$ -- 1
-purify$ -- 211
+purify$ -- 217
 quote$ -- 0
-skip$ -- 524
+skip$ -- 543
 stack$ -- 0
-substring$ -- 1126
-swap$ -- 1077
-text.length$ -- 31
+substring$ -- 1196
+swap$ -- 1176
+text.length$ -- 34
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 112
 warning$ -- 1
-while$ -- 165
-width$ -- 31
-write$ -- 335
-(There was 1 warning)
+while$ -- 173
+width$ -- 32
+write$ -- 353
+(There were 3 warnings)
