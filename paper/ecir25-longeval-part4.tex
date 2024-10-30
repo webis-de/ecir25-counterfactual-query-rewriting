@@ -1,16 +1,16 @@
 \section{Evaluation}
 
-We evaluate our counterfactual query rewriting approaches in the LongEval scenario that comes with overlapping queries accross 6~timestamps between July~2022 and August~2023~\cite{alkhalifa:2023,alkhalifa:2024,galuscakova:2023}. First, we modify the LongEval datasets to focus on queries that re-occur accross timestamps, and subsequently study how documents evolve over time due to deletions and content updates. Finally, we evaluate the retrieval effectiveness of all approaches and use an ablation study to study if they generalize beyound previously known relevant documents.
+We evaluate our counterfactual query rewriting approaches in the LongEval scenario that comes with overlapping queries accross 6~timestamps between June~2022 and August~2023~\cite{alkhalifa:2023,alkhalifa:2024,galuscakova:2023}. First, we modify the LongEval datasets to focus on queries that re-occur accross timestamps, and subsequently study how documents evolve over time due to deletions and content updates. Finally, we evaluate the retrieval effectiveness of all approaches and use an ablation study to study if they generalize beyound previously known relevant documents.
 
 \subsection{Experimental Setup}
 
+We modify the LongEval corpora~\cite{alkhalifa:2023,alkhalifa:2024,galuscakova:2023} to evaluate retrieval effectiveness for re-occuring queries over time. LongEval provides queries, documents, and relevance judgments derived with click models for June~2022, July~2022, September~2022, January~2023, June~2023, and August~2023. The queries and clicks were sampled from Qwant so that the queries rather do not change their intent over time~\cite{galuscakova:2023} while documents might be updated, deleted, or newly created. For each timestamp, we remove queries that did not occur in an earlier timestamp, leaving us with 5~timestamps for evaluation between July~2022 and August~2023~(between 169~and 298~test queries; June is skipped as no previous logs are available). Figure~\ref{fig:query-overlap} provides an overview of the re-occuring queries between the different timestamps. For instance, 138~queries from June~2023 re-occur in August~2024, forming the biggest time gap in our evaluation scenario, whereas the smallest time gap occurs for the 150~queries from June~2023 that re-occur in July~2023.
 
-We noticed that queries overlap over different time slots, and in case their intent stays the same, we aim to transfer their relevance information to the new time slots. Consecutively, for those queries we know what documents were clicked a few months ago. We decided to use this feedback and query expansion with the BO1 model~\cite{amati:2003} to create keyqueries and use the same approach as \cite{froebe-mis:2022}. Thereby, we use BO1 to obtain candidate terms for query terms, as pilot experiments showed that BO1 expansion terms yield higher effectiveness than RM3~\cite{jaleel:2004} expansions. We inserted the clicked documents into the current corpus and reformulated the queries with the BO1 model until those documents were in the top positions. After that we removed old documents from the ranking. This implementation of the keyquery concept is not the most effective one, more effective approaches that leverage a generate-and-test paradigm~\cite{froebe:2021c} exist and are interesting directions for future work (i.e., explicitly generating many variants and selecting the variants that are highly effective).
+In our retrieval experiments, we contrast five baselines with our three approaches. As baselines, we use BM25~\cite{robertson:1994}, BM25 with RM3 expansion (both implemented in PyTerrier~\cite{macdonald:2020}), ColBERT~\cite{khattab:2020}, List-in-T5~\cite{tamber:2023}, and monoT5~\cite{nogueira:2020}. We leave all baselines at their default hyperparameters. We also implement our three approaches in PyTerrier using BM25 as underlying retrieval model. For boosting (BM25$_{Boost}$), we set {\color{red} TODO: Hyperparameter}. For relevance feedback  (BM25$_{RF}$), we use $k=10$ feedback terms as this is the default for RM3 in PyTerrier. For keyqueries (BM25$_{keyquery}$), we use {\color{red} TODO: Hyperparameter}.
 
 
-\subsection{Evolution of Documents in the LongEval Corpora over Time}
+%TODO: for camera ready: ColBERT, List-in-T5, and monoT5 baselines come from TIRA/TIREx
 
-Short analysis: how much did documents change? We use CopyCat~\cite{froebe:2021a}, as it was previously used to deduplicate web crawls, e.g., the ClueWebs, in default settings. ToDo: add motivation for measure and containment conceptually implemented by the S3 score.
 
 \begin{figure}[t]
     \begin{minipage}{.49\textwidth}
@@ -28,24 +28,9 @@ Short analysis: how much did documents change? We use CopyCat~\cite{froebe:2021a
     \end{minipage}
 \end{figure}
 
-% TBD.
+\subsection{Evolution of Documents in the LongEval Corpora over Time}
 
-% Approaches for comparison:
-
-% LTR by Gijs for another approach that incorporates historical relevance data.
-
-% Maybe few-shot prompting LLMs could be another baseline, but I would try to rather not include such baselines at the moment.
-
-
-The LongEval test collections capture dynamic evaluation scenarios with different changes in all components. It evolves naturally over time, and a natural overlap between documents, queries, and qrels occurs. Since the explored approaches systematically exploit this overlap, the evaluation is challenging. Since the overlap occurs naturally in the test collection, evaluating the systems in this life-like scenario with redundancies is valid. However, we can hardly make any assumptions about how well the approaches generalize. Therefore, we include a second evaluation scenario that excludes any redundancies in the relevant documents.
-
-  
-\subsection{Baselines}
-The keyqueries approach is compared to further baselines. 
-
-We incorporate all our approaches into BM25~\cite{robertson:1994}.
-
-For RF, we set $k=10$.
+After we fixed the queries to those that overlap among the different timestamps, only documents may evolve over time. Documents may evolve via deletion, creation, or updates to the content. {\color{red} Accross all timestamps, XY~documents were deleted over time, XY~documents were newly created at some timestamp, and XY~documents were constantly available.} For documents that occur accross multiple timestamps, we measure how they changed over time by inspecting their pairwise similarities. We use the $S_{3}$ score~\cite{bernstein:2005} implemented in CopyCat~\cite{froebe:2021a} in default configuration to measure similarity (1~indicates identical documents, 0~documents without any overlap) as this score was specifically developed to identify redundant documents within retrieval scenarios~\cite{bernstein:2005}. Figure~\ref{fig:document-similarities} shows the $S_{3}$ similarities for all documents with overlapping URLs accross all timestamps, indicating that 40\,\% of documents do not change their content~($S_{3}=1.0$), whereas around 50\,\%have an $S_{3}$ similarity below~0.8 that indicate non-negligible changes (prior research used 0.82~as near-duplicate threshold on Web corpora~\cite{froebe:2021a}). Given that the LongEval corpora evolve only slightly among the timestamps, we include an ablation study that removes all overlap to analyze how approaches generalize.
 
 
 \subsection{Natural Evolving Test Collection}
