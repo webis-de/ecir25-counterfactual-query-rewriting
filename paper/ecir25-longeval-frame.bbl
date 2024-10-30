@@ -3,11 +3,6 @@
 \providecommand{\urlprefix}{URL }
 \providecommand{\doi}[1]{https://doi.org/#1}
 
-\bibitem{jaleel:2004}
-Abdul-Jaleel, N., Allan, J., Croft, W.B., Diaz, F., Larkey, L., Li, X.,
-  Smucker, M.D., Wade, C.: Umass at trec 2004: Novelty and hard. Computer
-  Science Department Faculty Publication Series p.~189 (2004)
-
 \bibitem{DBLP:conf/wsdm/AdarTDE09}
 Adar, E., Teevan, J., Dumais, S.T., Elsas, J.L.: The web changes everything:
   understanding the dynamics of web content. In: {WSDM}. pp. 282--291. {ACM}
@@ -41,18 +36,12 @@ Alkhalifa, R., Borkakoty, H., Deveaud, R., El{-}Ebshihy, A., Anke, L.E., Fink,
   9-12 September, 2024. {CEUR} Workshop Proceedings, vol.~3740, pp. 2267--2289.
   CEUR-WS.org (2024)
 
-\bibitem{amati:2003}
-Amati, G.: Divergence from randomness. (2003)
-
-\bibitem{DBLP:conf/sigir/Baeza-YatesGJMPS07}
-Baeza{-}Yates, R.A., Gionis, A., Junqueira, F., Murdock, V., Plachouras, V.,
-  Silvestri, F.: The impact of caching on search engines. In: {SIGIR}. pp.
-  183--190. {ACM} (2007)
-
-\bibitem{DBLP:conf/www/CambazogluJPBCLB10}
-Cambazoglu, B.B., Junqueira, F.P., Plachouras, V., Banachowski, S.A., Cui, B.,
-  Lim, S., Bridge, B.: A refreshing perspective of search engine caching. In:
-  {WWW}. pp. 181--190. {ACM} (2010)
+\bibitem{bernstein:2005}
+Bernstein, Y., Zobel, J.: Redundant documents and search effectiveness. In:
+  Herzog, O., Schek, H., Fuhr, N., Chowdhury, A., Teiken, W. (eds.) Proceedings
+  of the 2005 {ACM} {CIKM} International Conference on Information and
+  Knowledge Management, Bremen, Germany, October 31 - November 5, 2005. pp.
+  736--743. {ACM} (2005), \url{https://doi.org/10.1145/1099554.1099733}
 
 \bibitem{DBLP:journals/csur/CamposDJJ14}
 Campos, R., Dias, G., Jorge, A.M., Jatowt, A.: Survey of temporal information
@@ -150,13 +139,13 @@ Keller, J., Breuer, T., Schaer, P.: Leveraging prior relevance signals in web
   Forum ({{CLEF}} 2024), Grenoble, France, 9-12 September, 2024. {{CEUR}}
   Workshop Proceedings, vol.~3740, pp. 2396--2406. CEUR-WS.org (2024)
 
-\bibitem{li:2022}
-Li, S., Lv, F., Jin, T., Li, G., Zheng, Y., Zhuang, T., Liu, Q., Zeng, X.,
-  Kwok, J.T., Ma, Q.: Query rewriting in taobao search. In: Hasan, M.A., Xiong,
-  L. (eds.) Proceedings of the 31st {ACM} International Conference on
-  Information {\&} Knowledge Management, Atlanta, GA, USA, October 17-21, 2022.
-  pp. 3262--3271. {ACM} (2022). \doi{10.1145/3511808.3557068},
-  \url{https://doi.org/10.1145/3511808.3557068}
+\bibitem{khattab:2020}
+Khattab, O., Zaharia, M.: Colbert: Efficient and effective passage search via
+  contextualized late interaction over {BERT}. In: Huang, J.X., Chang, Y.,
+  Cheng, X., Kamps, J., Murdock, V., Wen, J., Liu, Y. (eds.) Proceedings of the
+  43rd International {ACM} {SIGIR} conference on research and development in
+  Information Retrieval, {SIGIR} 2020, Virtual Event, China, July 25-30, 2020.
+  pp. 39--48. {ACM} (2020). \doi{10.1145/3397271.3401075}
 
 \bibitem{lin:2021}
 Lin, J., Nogueira, R.F., Yates, A.: Pretrained Transformers for Text Ranking:
@@ -176,6 +165,14 @@ Macdonald, C., Tonellotto, N.: Declarative experimentation in information
   Event, Norway, September 14-17, 2020. pp. 161--168. {ACM} (2020).
   \doi{10.1145/3409256.3409829}
 
+\bibitem{nogueira:2020}
+Nogueira, R.F., Jiang, Z., Pradeep, R., Lin, J.: Document ranking with a
+  pretrained sequence-to-sequence model. In: Cohn, T., He, Y., Liu, Y. (eds.)
+  Findings of the Association for Computational Linguistics: {EMNLP} 2020,
+  Online Event, 16-20 November 2020. Findings of {ACL}, vol. {EMNLP} 2020, pp.
+  708--718. Association for Computational Linguistics (2020).
+  \doi{10.18653/V1/2020.FINDINGS-EMNLP.63}
+
 \bibitem{robertson:1994}
 Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.:
   Okapi at {{TREC-3}}. (Jan 1994)
@@ -188,6 +185,11 @@ Silverstein, C., Henzinger, M., Marais, H., Moricz, M.: Analysis of a very
 \bibitem{DBLP:conf/sigir/Soboroff06}
 Soboroff, I.: Dynamic test collections: measuring search effectiveness on the
   live web. In: {SIGIR}. pp. 276--283. {ACM} (2006)
+
+\bibitem{tamber:2023}
+Tamber, M.S., Pradeep, R., Lin, J.: Scaling down, litting up: Efficient
+  zero-shot listwise reranking with seq2seq encoder-decoder models. CoRR
+  \textbf{abs/2312.16098} (2023). \doi{10.48550/ARXIV.2312.16098}
 
 \bibitem{DBLP:conf/sigir/TikhonovBBOKG13}
 Tikhonov, A., Bogatyy, I., Burangulov, P., Ostroumova, L., Koshelev, V., Gusev,
