@@ -43,4 +43,4 @@ We evaluate the effectiveness of our five baselines and our three approaches usi
 
 \input{table-results-fold}
 
-To verify if the improvements of BM25$_{RF}$ and BM25$_{keyquery}$ come, as expected, from a generalization beyound previously known relevant documents, we conduct an ablation study where we remove xy.
+To verify if the improvements of BM25$_{RF}$ and BM25$_{keyquery}$ come, as expected, from a generalization beyound previously known relevant documents, we conduct an ablation study where we remove all documents that occur in previous timestamps from the runs and relevance judgments of each timestamp and evaluate nDCG$^{'}$. This way, all documents in the evaluation have never been seen before. Table~\ref{tab:table-results-fold} shows the results of the ablation study as improvement upon BM25 for our three approaches. As BM25$_{Boost}$ can not generalize to new documents, they never improve (improvement is always~$+0.0$). However, both BM25$_{RF}$ and BM25$_{keyquery}$ generalize as they almost always improve the effectiveness on unseen documents, even significant on Januar~2024.
