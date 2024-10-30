@@ -177,6 +177,13 @@ Nogueira, R.F., Jiang, Z., Pradeep, R., Lin, J.: Document ranking with a
 Robertson, S., Walker, S., Jones, S., {Hancock-Beaulieu}, M., Gatford, M.:
   Okapi at {{TREC-3}}. (Jan 1994)
 
+\bibitem{sakai:2007}
+Sakai, T.: Alternatives to bpref. In: Kraaij, W., de~Vries, A.P., Clarke,
+  C.L.A., Fuhr, N., Kando, N. (eds.) {SIGIR} 2007: Proceedings of the 30th
+  Annual International {ACM} {SIGIR} Conference on Research and Development in
+  Information Retrieval, Amsterdam, The Netherlands, July 23-27, 2007. pp.
+  71--78. {ACM} (2007). \doi{10.1145/1277741.1277756}
+
 \bibitem{DBLP:journals/sigir/SilversteinHMM99}
 Silverstein, C., Henzinger, M., Marais, H., Moricz, M.: Analysis of a very
   large web search engine query log. {SIGIR} Forum  \textbf{33}(1),  6--12

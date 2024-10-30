@@ -11,8 +11,7 @@ Our approaches counterfactually assume that documents that were previously relev
 We apply our counterfactual relevance feedback in three scenarios: (1)~via boosting, (2)~via explicit relevance feedback, and (3)~via keyqueries. Boosting just 
 re-weighs known (non-)relevant documents, which can not generalize to new or deleted documents. Explicit relevance feedback extends the query with terms from known relevant documents but does not incorporate the resulting ranking. Therefore, we include the concept of so-called keyqueries~\cite{gollub:2013a} that use the terms suggested by the relevance feedback to reformulate the queries until the target documents appear at the top-positions.
 
-We evaluate our counterfactual query rewriting approaches using the LongEval test collection.% on all available timestamps from July 2022~to August~2023. 
-Our results show that counterfactual query rewriting is as effective as boosting but generalizes to new documents, thereby being more robust than boosting and substantially outperforming neural transformers while being much more efficient as queries can be pre-computed. Our code is publicly available.%
+We evaluate our counterfactual query rewriting approaches on the LongEval test collection. Our results show that counterfactual query rewriting is as effective as boosting but generalizes to new documents, thereby being more robust than boosting and substantially outperforming neural transformers while being much more efficient as queries can be pre-computed. Our code is publicly available.%
 \footnote{\url{https://anonymous.4open.science/r/counterfactual-query-rewriting}}
 
 

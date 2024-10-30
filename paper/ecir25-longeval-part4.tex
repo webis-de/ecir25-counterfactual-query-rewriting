@@ -35,9 +35,11 @@ After we fixed the queries to those that overlap among the different timestamps,
 
 \subsection{Retrieval Effectiveness}
 
-We evaluate the effectiveness of our 
 
 \input{table-results}
+
+We evaluate the effectiveness of our five baselines and our three approaches using nDCG@10. However, as the LongEval corpus was derived from click logs derived from unknown rankings, unjudged documents have a high impact on the evaluation. In this scenario, it is recommendet to remove unjudged documents to mitigate their impact~\cite{sakai:2007} which we additionally report as nDCG@10$^{'}$.
+
 
 \subsection{Temporal Per Topic Cross Validation}
 To emphasize the actual effect of the approaches and how well they generalize to new documents, we evaluated them in a cross-validation setting. For each topic at each point in time, the relevant documents are split into $k$ folds. For each fold, only the test documents are indexed and retrieved. The different approaches can then use the documents in the train split if they were already present at the previous points in time. Since some documents can be relevant for multiple topics, the train test splits must be updated after creation to avoid duplicates. This makes the splits less random and differently large but should be neglectable for this initial evaluation.
