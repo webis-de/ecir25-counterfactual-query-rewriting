@@ -1,6 +1,6 @@
 \section{Evaluation}
 
-We evaluate xyz using the LongEval datasets that come with overlapping queries accross 6~timestamps between July 2022~to August~2023~\cite{alkhalifa:2023,alkhalifa:2024,galuscakova:2023}. First, we study how overlap behaves by measuring the similarity and contrasting x with y, then, we conduct retrieval experiments and an ablation study.
+We evaluate our counterfactual query rewriting approaches in the LongEval scenario that comes with overlapping queries accross 6~timestamps between July~2022 and August~2023~\cite{alkhalifa:2023,alkhalifa:2024,galuscakova:2023}. First, we modify the LongEval datasets to focus on queries that re-occur accross timestamps, and subsequently study how documents evolve over time due to deletions and content updates. Finally, we evaluate the retrieval effectiveness of all approaches and use an ablation study to study if they generalize beyound previously known relevant documents.
 
 \subsection{Experimental Setup}
 
@@ -8,7 +8,7 @@ We evaluate xyz using the LongEval datasets that come with overlapping queries a
 We noticed that queries overlap over different time slots, and in case their intent stays the same, we aim to transfer their relevance information to the new time slots. Consecutively, for those queries we know what documents were clicked a few months ago. We decided to use this feedback and query expansion with the BO1 model~\cite{amati:2003} to create keyqueries and use the same approach as \cite{froebe-mis:2022}. Thereby, we use BO1 to obtain candidate terms for query terms, as pilot experiments showed that BO1 expansion terms yield higher effectiveness than RM3~\cite{jaleel:2004} expansions. We inserted the clicked documents into the current corpus and reformulated the queries with the BO1 model until those documents were in the top positions. After that we removed old documents from the ranking. This implementation of the keyquery concept is not the most effective one, more effective approaches that leverage a generate-and-test paradigm~\cite{froebe:2021c} exist and are interesting directions for future work (i.e., explicitly generating many variants and selecting the variants that are highly effective).
 
 
-\subsection{Similarities and Changes in the Longeval Corpora.}
+\subsection{Evolution of Documents in the LongEval Corpora over Time}
 
 Short analysis: how much did documents change? We use CopyCat~\cite{froebe:2021a}, as it was previously used to deduplicate web crawls, e.g., the ClueWebs, in default settings. ToDo: add motivation for measure and containment conceptually implemented by the S3 score.
 
