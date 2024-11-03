@@ -1,15 +1,15 @@
 TIRA_CACHE_DIR=.tira/ ./create-indices.py
 
 
-LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training --input-dataset longeval-short-july-20230513-training --output-dir t1
+LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --input-dataset longeval-short-july-20230513-training --output-dir t1
 
-LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training longeval-short-july-20230513-training --input-dataset longeval-long-september-20230513-training --output-dir t2
+LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --input-dataset longeval-long-september-20230513-training --output-dir t2
 
-LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training longeval-short-july-20230513-training longeval-long-september-20230513-training --input-dataset longeval-2023-01-20240423-training --output-dir t3
+LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --input-dataset longeval-2023-01-20240423-training --output-dir t3
 
-LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training longeval-short-july-20230513-training longeval-long-september-20230513-training longeval-2023-01-20240423-training --input-dataset longeval-2023-06-20240418-training --output-dir t4
+LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --input-dataset longeval-2023-06-20240418-training --output-dir t4
 
-LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training longeval-short-july-20230513-training longeval-long-september-20230513-training longeval-2023-01-20240423-training longeval-2023-06-20240418-training --input-dataset longeval-2023-08-20240418-training --output-dir t5
+LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --input-dataset longeval-2023-08-20240418-training --output-dir t5
 
 
 

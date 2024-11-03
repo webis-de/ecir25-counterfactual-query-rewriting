@@ -12,16 +12,6 @@ import json
 import os
 
 
-def all_splits(output_dir):
-    splits = json.load(open('../../data/splits.json'))
-    ret = {'no-split': set([])}
-    for split, groups in splits[output_dir].items():
-        ret[split] = set(groups['test'])
-    return ret
-
-def __normalize_queries(q):
-    return q.lower().strip()
-
 def load_oracle_index(file_name, allowed_dataset_ids):
     print(f'Load oracle index from {file_name}')
     entries = pd.read_json(file_name, orient='records', lines=True)
@@ -46,19 +36,22 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Construct neighbors')
     parser.add_argument('--input-dataset', type=str, help='Input file', default='cranfield-20230107-training')
     parser.add_argument('--output-dir', type=str, help='Output file', required=True)
-    parser.add_argument('--query-document-pairs', type=str, help='Output file', default=str((pathlib.Path(__file__).parent.parent.parent.resolve() / 'data' / 'input-data-for-keyqueries.jsonl.gz').absolute()), required=False)
     parser.add_argument('--fb-terms', type=list, help='fb_terms passed to pyterrier', nargs='+', default=[10], required=False)
     parser.add_argument('--w-models', type=list, help='weighting models passed to pyterrier', nargs='+', default=['BM25', 'DirichletLM'], required=False)
-    parser.add_argument('--oracle-dataset-ids', type=str, help='allowed dataset ids', nargs='+', required=True)
     parser.add_argument('--fb-docs', type=list, help='fb_docs passed to pyterrier', nargs='+', default=[5], required=False)
     parser.add_argument('--first-stage-top-k', type=int, help='top-k documents used for query reformulation', default=900, required=False)
     return parser.parse_args()
 
 
-def get_overlapping_queries(pt_dataset, oracle_index):
+def get_overlapping_queries(pt_dataset, output_dir):
     print('Look for overlapping queries...')
+    splits = json.load(gzip.open('../../data/expansion-documents.json.gz', 'rt'))
+    queries = set()
+    for query in splits[output_dir]:
+        queries.add(query)
+
     overlapping_queries = {i.query_id: i.default_text() for i in pt_dataset.irds_ref().queries_iter()}
-    overlapping_queries = {k: v for k, v in overlapping_queries.items() if __normalize_queries(v) in oracle_index}
+    overlapping_queries = {k: v for k, v in overlapping_queries.items() if k in queries}
 
     print(f'Done. Found {len(overlapping_queries)} overlapping queries.')
     return overlapping_queries
@@ -94,7 +87,7 @@ def all_expanded_queries(query, min_length):
 
 
 def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_dir):
-    df_file = f'{output_dir}/{wmodel}_{query["qid"]}.jsonl.gz'
+    df_file = f'{output_dir}/queries/{wmodel}_{query["qid"]}.jsonl.gz'
     if not os.path.isfile(df_file):
         qrels = []
         for _, i in oracle_retrieval_results(pd.DataFrame([query])).iterrows():
@@ -109,13 +102,13 @@ def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_d
         retriever = pt.BatchRetrieve(index, wmodel=wmodel)
         for candidate in all_expanded_queries(query, 3):
             topics = pd.DataFrame([{'qid': '1', 'query': candidate}])
-            results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet()])
+            results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet(), 'recall_10'])
             assert len(results) == 1
             score = results.iloc[0]['ndcg_cut_10']
             num_ret = results.iloc[0]['NumRet']
-            if num_ret < 100:
+            if num_ret < 15:
                continue
-            df += [{'topic': query, 'candidate': candidate, 'ndcg_cut_10': score, 'num_ret': num_ret}]
+            df += [{'topic': query, 'candidate': candidate, 'ndcg_cut_10': score, 'num_ret': num_ret, 'recall@10': 'recall_10', 'len(qrels)': len(qrels)}]
 
         df = pd.DataFrame(df)
         df = df.sort_values('ndcg_cut_10', ascending=False).head(50)
@@ -123,44 +116,25 @@ def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_d
 
     return pd.read_json(df_file, lines=True).iloc[0]['candidate']
 
-def build_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset):
-    additional_docs = {}
-
-    for i in oracle_index:
-        for j in oracle_index[i]:
-            additional_docs[j['doc_id']] = j['doc']
-
-    additional_docs = [{'docno': 'ADD_' + k, 'text': v} for k, v in additional_docs.items()]
-    print(f'Have {len(additional_docs)} documents from the oracle.')
-
-    doc_ids = []
-
-    for _, i in bm25_raw(topics).iterrows():
-        if i['qid'] in overlapping_queries:
-            doc_ids.append(i['docno'])
-    
-    doc_ids = set(doc_ids)
-
-    docs_for_reformulation = []
-
-    for i in tqdm(pt_dataset.get_corpus_iter()):
-        if i['docno'] not in doc_ids:
-            continue
-        docs_for_reformulation += [i]
-    
-    print(f'Have {len(additional_docs)} documents for reformulation.')
-
-    iter_indexer = pt.IterDictIndexer(f"/tmp/{randint(0,1000000000)}/reformulation-index", meta={'docno': 50, 'text': 4096}, overwrite=True)
-    return iter_indexer.index(tqdm(docs_for_reformulation + additional_docs, 'Index'))
+def get_reformulation_index(output_dir):
+    return pt.IndexRef.of(os.path.abspath(f"indices/{split}/"))
 
 def get_oracle_retrieval_results(topics, oracle_index, overlapping_queries):
     ret = []
 
+    qid_to_query = {}
     for _, topic in topics.iterrows():
+        qid_to_query[topic['qid']] = topic['query']
+
+    splits = json.load(gzip.open('../../data/expansion-documents.json.gz', 'rt'))
+    queries = set()
+    ret = []
+
+    for query, docs_for_query in splits[output_dir].items:
         r = 0
-        for hit in sorted(oracle_index[__normalize_queries(overlapping_queries[topic['qid']])], key=lambda x: x['relevance'], reverse=True):
+        for hit in docs_for_query:
             r += 1
-            ret += [{'qid': topic['qid'], 'query': topic['query'], 'docno': 'ADD_' + hit['doc_id'], 'rank': r, 'score': 100-r, 'run_id': 'oracle', 'relevance': hit['relevance']}]
+            ret += [{'qid': query, 'query': qid_to_query['query'], 'docno': hit, 'rank': r, 'score': 100-r, 'run_id': 'oracle', 'relevance': 1}]
 
     ret = pd.DataFrame(ret)
     return pt.transformer.get_transformer(ret)
@@ -207,13 +181,12 @@ if __name__ == '__main__':
     tira = Client('https://api.tira.io')
 
     pt_dataset = pt.get_dataset(f'irds:ir-benchmarks/{args.input_dataset}')
-    oracle_index = load_oracle_index(args.query_document_pairs, args.oracle_dataset_ids)
     overlapping_queries = get_overlapping_queries(pt_dataset, oracle_index)
     topics = get_overlapping_topics(pt_dataset, overlapping_queries)
     oracle_retrieval_results = get_oracle_retrieval_results(topics, oracle_index, overlapping_queries)
 
     bm25_raw = tira.pt.from_submission('ir-benchmarks/tira-ir-starter/BM25 (tira-ir-starter-pyterrier)', args.input_dataset) % args.first_stage_top_k
     index = tira.pt.index('ir-benchmarks/tira-ir-starter/Index (tira-ir-starter-pyterrier)', args.input_dataset)
-    reformulation_index = build_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset)
+    reformulation_index = get_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset)
 
     run_foo(index, reformulation_index, args.w_models, args.fb_terms, args.fb_docs, args.output_dir, oracle_retrieval_results, topics)
