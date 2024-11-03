@@ -1,3 +1,6 @@
+TIRA_CACHE_DIR=.tira/ ./create-indices.py
+
+
 LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training --input-dataset longeval-short-july-20230513-training --output-dir t1
 
 LD_BIND_NOW=1 TIRA_CACHE_DIR=.tira/ ./keyqueries.py --oracle-dataset-ids longeval-train-20230513-training longeval-heldout-20230513-training longeval-short-july-20230513-training --input-dataset longeval-long-september-20230513-training --output-dir t2
