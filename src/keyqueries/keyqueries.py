@@ -66,12 +66,17 @@ def get_overlapping_topics(pt_dataset, overlapping_queries):
     print(f'Done. Found {len(topics)} overlapping topics.')
     return topics
 
-def all_expanded_queries(query, min_length, min_weight=0.001):
+def all_expanded_queries(query, max_length, min_weight=0.001):
     from itertools import chain, combinations
     def powerset(iterable):
         s = list(iterable)
         ret = chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
-        return ['applypipeline:off ' + (' '.join(i)) for i in ret if len(i) >= min_length and len(i) < 7]
+        ret = set([set(i) for i in ret if len(i) > 0 and len(i) < max_length]
+        for i in ret:
+            tmp = query + ''
+            for t in i:
+                tmp = tmp.replace(t, '')
+            yield tmp
 
     terms = [i.split('^') for i in query['query'].split() if '^' in i]
     terms = [i[0] + '^' + str(min_weight if not(float(i[1]) > min_weight) else i[1]) for i in terms]
@@ -85,6 +90,7 @@ def all_expanded_queries(query, min_length, min_weight=0.001):
                 add = False
         if add:
             ret += [i]
+    print(f'Found {len(ret)} queries')
     return ret
 
 
