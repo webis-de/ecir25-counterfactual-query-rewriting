@@ -48,13 +48,6 @@ Campos, R., Dias, G., Jorge, A.M., Jatowt, A.: Survey of temporal information
   retrieval and related applications. {ACM} Comput. Surv.  \textbf{47}(2),
   15:1--15:41 (2014)
 
-\bibitem{chapelle:2009}
-Chapelle, O., Zhang, Y.: A dynamic bayesian network click model for web search
-  ranking. In: Quemada, J., Le{\'{o}}n, G., Maarek, Y.S., Nejdl, W. (eds.)
-  Proceedings of the 18th International Conference on World Wide Web, {WWW}
-  2009, Madrid, Spain, April 20-24, 2009. pp. 1--10. {ACM} (2009).
-  \doi{10.1145/1526709.1526711}, \url{https://doi.org/10.1145/1526709.1526711}
-
 \bibitem{chuklin:2015}
 Chuklin, A., Markov, I., de~Rijke, M.: Click Models for Web Search. Synthesis
   Lectures on Information Concepts, Retrieval, and Services, Morgan {\&}
@@ -69,17 +62,6 @@ Dumais, S.T.: Putting searchers into search. In: {SIGIR}. pp.~1--2. {ACM}
 Elsas, J.L., Dumais, S.T.: Leveraging temporal dynamics of document content in
   relevance ranking. In: {WSDM}. pp. 1--10. {ACM} (2010)
 
-\bibitem{froebe:2022d}
-Fr{\"o}be, M., Akiki, C., Potthast, M., Hagen, M.: Noise-reduction for
-  automatically transferred relevance judgments. In:
-  Barr{\'{o}}n{-}Cede{\~{n}}o, A., {Da San Martino}, G., Esposti, M.D.,
-  Sebastiani, F., Macdonald, C., Pasi, G., Hanbury, A., Potthast, M., Faggioli,
-  G., Ferro, N. (eds.) Experimental {IR} Meets Multilinguality, Multimodality,
-  and Interaction. 13th International Conference of the {CLEF} Association
-  ({CLEF} 2022). Lecture Notes in Computer Science, vol. 13390, pp. 48--61.
-  Springer, Berlin Heidelberg New York (Sep 2022).
-  \doi{10.1007/978-3-031-13643-6_4}
-
 \bibitem{froebe:2021a}
 Fr{\"o}be, M., Bevendorff, J., Gienapp, L., V{\"o}lske, M., Stein, B.,
   Potthast, M., Hagen, M.: {CopyCat: Near-Duplicates within and between the
@@ -87,6 +69,12 @@ Fr{\"o}be, M., Bevendorff, J., Gienapp, L., V{\"o}lske, M., Stein, B.,
   P., Jones, R., Sakai, T. (eds.) 44th International ACM Conference on Research
   and Development in Information Retrieval (SIGIR 2021). pp. 2398--2404. ACM
   (Jul 2021). \doi{10.1145/3404835.3463246}
+
+\bibitem{froebe:2022c}
+Fr{\"o}be, M., G{\"u}nther, S., Bondarenko, A., Huck, J., Hagen, M.: {Using
+  Keyqueries to Reduce Misinformation in Health-Related Search Results}. In:
+  2nd Workshop on Reducing Online Misinformation through Credible Information
+  Retrieval (ROMCIR 2022). CEUR Workshop Proceedings, CEUR-WS.org (Apr 2022)
 
 \bibitem{froebe:2021c}
 Fr{\"o}be, M., Schmidt, E.O., Hagen, M.: Efficient query obfuscation with
