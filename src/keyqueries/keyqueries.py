@@ -10,6 +10,7 @@ from pathlib import Path
 from ir_measures import NumRet
 import json
 import os
+import gzip
 
 
 def load_oracle_index(file_name, allowed_dataset_ids):
@@ -65,14 +66,15 @@ def get_overlapping_topics(pt_dataset, overlapping_queries):
     print(f'Done. Found {len(topics)} overlapping topics.')
     return topics
 
-def all_expanded_queries(query, min_length):
+def all_expanded_queries(query, min_length, min_weight=0.001):
     from itertools import chain, combinations
     def powerset(iterable):
         s = list(iterable)
         ret = chain.from_iterable(combinations(s, r) for r in range(len(s)+1))
         return ['applypipeline:off ' + (' '.join(i)) for i in ret if len(i) >= min_length and len(i) < 7]
 
-    terms = [i for i in query['query'].split() if '^' in i]
+    terms = [i.split('^') for i in query['query'].split() if '^' in i]
+    terms = [i[0] + '^' + str(min_weight if not(float(i[1]) > min_weight) else i[1]) for i in terms]
     mandatory_terms = [i for i in terms if float(i.split('^')[1]) > 0.1]
     ret_1 = list(powerset(terms))
     ret = []
@@ -102,24 +104,30 @@ def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_d
         retriever = pt.BatchRetrieve(index, wmodel=wmodel)
         for candidate in all_expanded_queries(query, 3):
             topics = pd.DataFrame([{'qid': '1', 'query': candidate}])
-            results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet(), 'recall_10'])
+            results = pt.Experiment([retriever], topics, qrels, eval_metrics=['ndcg_cut_10', NumRet()])
             assert len(results) == 1
             score = results.iloc[0]['ndcg_cut_10']
             num_ret = results.iloc[0]['NumRet']
-            if num_ret < 15:
-               continue
-            df += [{'topic': query, 'candidate': candidate, 'ndcg_cut_10': score, 'num_ret': num_ret, 'recall@10': 'recall_10', 'len(qrels)': len(qrels)}]
+            df += [{'topic': query, 'candidate': candidate, 'ndcg_cut_10': score, 'num_ret': num_ret, 'len(qrels)': len(qrels)}]
 
+        if len(df) < 5:
+            return query['query']
         df = pd.DataFrame(df)
-        df = df.sort_values('ndcg_cut_10', ascending=False).head(50)
+        df = df.sort_values('ndcg_cut_10', ascending=False)
+        if len(df[df['num_ret'] > 15]) > 5:
+            df = df[df['num_ret'] > 15]
+        elif len(df[df['num_ret'] > 10]) > 5:
+            df = df[df['num_ret'] > 10]
+ 
+        df = df.head(50)
         df.to_json(df_file, lines=True, orient='records')
 
     return pd.read_json(df_file, lines=True).iloc[0]['candidate']
 
-def get_reformulation_index(output_dir):
+def get_reformulation_index(split):
     return pt.IndexRef.of(os.path.abspath(f"indices/{split}/"))
 
-def get_oracle_retrieval_results(topics, oracle_index, overlapping_queries):
+def get_oracle_retrieval_results(topics, output_dir):
     ret = []
 
     qid_to_query = {}
@@ -130,11 +138,11 @@ def get_oracle_retrieval_results(topics, oracle_index, overlapping_queries):
     queries = set()
     ret = []
 
-    for query, docs_for_query in splits[output_dir].items:
+    for query, docs_for_query in splits[output_dir].items():
         r = 0
         for hit in docs_for_query:
             r += 1
-            ret += [{'qid': query, 'query': qid_to_query['query'], 'docno': hit, 'rank': r, 'score': 100-r, 'run_id': 'oracle', 'relevance': 1}]
+            ret += [{'qid': query, 'query': qid_to_query[query], 'docno': hit, 'rank': r, 'score': 100-r, 'run_id': 'oracle', 'relevance': 1}]
 
     ret = pd.DataFrame(ret)
     return pt.transformer.get_transformer(ret)
@@ -159,19 +167,11 @@ def run_foo(index, reformulation_index, weighting_models, fb_terms, fb_docs, out
                 retriever = pt.BatchRetrieve(index, wmodel=wmodel)
                 retrieval_results = retriever(reformulated_topics)
 
-                for split, docs_to_skip in all_splits(out_dir).items():
-                    results_for_split = []
-                    for _, i in retrieval_results.iterrows():
-                        if i['docno'] in docs_to_skip:
-                            continue
-                        results_for_split += [i.to_dict()]
+                retrieval_results['Q0'] = 0
+                retrieval_results['system'] = f'{wmodel}-keyquery'
+                retrieval_results = retrieval_results.copy().sort_values(["qid", "score", "docno"], ascending=[True, False, False]).reset_index()
 
-                    results_for_split = pd.DataFrame(results_for_split)
-                    results_for_split['Q0'] = 0
-                    results_for_split['system'] = f'{wmodel}-keyquery'
-                    results_for_split = results_for_split.copy().sort_values(["qid", "score", "docno"], ascending=[True, False, False]).reset_index()
-
-                    results_for_split[["qid", "Q0", "docno", "rank", "score", "system"]].to_csv(f'{out_dir}/{wmodel}-split-{split}.run.gz', sep=" ", header=False, index=False)
+                retrieval_results[["qid", "Q0", "docno", "rank", "score", "system"]].to_csv(f'{out_dir}/{wmodel}-split-no-split.run.gz', sep=" ", header=False, index=False)
 
 if __name__ == '__main__':
     args = parse_args()
@@ -181,12 +181,12 @@ if __name__ == '__main__':
     tira = Client('https://api.tira.io')
 
     pt_dataset = pt.get_dataset(f'irds:ir-benchmarks/{args.input_dataset}')
-    overlapping_queries = get_overlapping_queries(pt_dataset, oracle_index)
+    overlapping_queries = get_overlapping_queries(pt_dataset, args.output_dir)
     topics = get_overlapping_topics(pt_dataset, overlapping_queries)
-    oracle_retrieval_results = get_oracle_retrieval_results(topics, oracle_index, overlapping_queries)
+    oracle_retrieval_results = get_oracle_retrieval_results(topics, args.output_dir)
 
     bm25_raw = tira.pt.from_submission('ir-benchmarks/tira-ir-starter/BM25 (tira-ir-starter-pyterrier)', args.input_dataset) % args.first_stage_top_k
     index = tira.pt.index('ir-benchmarks/tira-ir-starter/Index (tira-ir-starter-pyterrier)', args.input_dataset)
-    reformulation_index = get_reformulation_index(oracle_index, bm25_raw, topics, pt_dataset)
+    reformulation_index = get_reformulation_index(args.output_dir)
 
     run_foo(index, reformulation_index, args.w_models, args.fb_terms, args.fb_docs, args.output_dir, oracle_retrieval_results, topics)
