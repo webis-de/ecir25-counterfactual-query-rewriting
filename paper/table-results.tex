@@ -1,7 +1,7 @@
 \begin{table}[t]
 \small
 \centering
-\renewcommand{\tabcolsep}{3.2pt}
+\renewcommand{\tabcolsep}{1.6pt}
 \caption{Retrieval effectiveness of the five baselines and our three approaches measured as nDCG@10 with and without unjudged documents (nDCG@10$^{'}$) across the five LongEval timestamps. {\color{red} $^{*}$ marks Bonferroni corrected significance for students t-test.}}
 \label{tab:table-results}
 
@@ -15,17 +15,19 @@
     
     \midrule
 
-    BM25 & .155 & .184 & .172 & .175 & .134 & .471 & .492 & .516 & .486 & .379 \\
-    BM25$_{RM3}$ & .147 & .181 & .163 & .174 & .134 & .478 & .490 & .524 & .492 & .388 \\
-    ColBERT & .198 & .207 & .201 & .184 & .151 & .402 & .409 & .420 & .408 & .315 \\
-    List-in-T5 & .203 & .204 & .202 & .198 & .161 & .401 & .413 & .425 & .413 & .317 \\
-    monoT5 & .202 & .219 & .197 & .202 & .154 & .405 & .410 & .415 & .411 & .314 \\
+BM25 & .155$^{\phantom{\dagger\ddagger}}$ & .184$^{\phantom{\dagger\ddagger}}$ & .172$^{\phantom{\dagger\ddagger}}$ & .175$^{\phantom{\dagger\ddagger}}$ & .134$^{\phantom{\dagger\ddagger}}$ & .471$^{\phantom{\dagger\ddagger}}$ & .492$^{\ddagger\phantom{\dagger}}$ & .516$^{\ddagger\phantom{\dagger}}$ & .486$^{\ddagger\phantom{\dagger}}$ & .379$^{\ddagger\phantom{\dagger}}$ \\
+    BM25$_{RM3}$ & .147$^{\ddagger\phantom{\dagger}}$ & .181$^{\phantom{\dagger\ddagger}}$ & .163$^{\phantom{\dagger\ddagger}}$ & .174$^{\phantom{\dagger\ddagger}}$ & .134$^{\phantom{\dagger\ddagger}}$ & .478$^{\ddagger\phantom{\dagger}}$ & .490$^{\ddagger\phantom{\dagger}}$ & .524$^{\ddagger\phantom{\dagger}}$ & .492$^{\ddagger\phantom{\dagger}}$ & .388$^{\ddagger\phantom{\dagger}}$ \\
+    ColBERT & .198$^{\phantom{\dagger\ddagger}}$ & .207$^{\phantom{\dagger\ddagger}}$ & .201$^{\phantom{\dagger\ddagger}}$ & .184$^{\phantom{\dagger\ddagger}}$ & .151$^{\phantom{\dagger\ddagger}}$ & .402$^{\dagger\phantom{\ddagger}}$ & .409$^{\dagger\phantom{\ddagger}}$ & .420$^{\dagger\phantom{\ddagger}}$ & .408$^{\dagger\phantom{\ddagger}}$ & .315$^{\dagger\phantom{\ddagger}}$ \\
+    List-in-T5 & .203$^{\phantom{\dagger\ddagger}}$ & .204$^{\phantom{\dagger\ddagger}}$ & .202$^{\phantom{\dagger\ddagger}}$ & .198$^{\phantom{\dagger\ddagger}}$ & .161$^{\phantom{\dagger\ddagger}}$ & .401$^{\dagger\phantom{\ddagger}}$ & .413$^{\dagger\phantom{\ddagger}}$ & .425$^{\dagger\phantom{\ddagger}}$ & .413$^{\dagger\phantom{\ddagger}}$ & .317$^{\dagger\phantom{\ddagger}}$ \\
+    monoT5 & .202$^{\phantom{\dagger\ddagger}}$ & .219$^{\phantom{\dagger\ddagger}}$ & .197$^{\phantom{\dagger\ddagger}}$ & .202$^{\phantom{\dagger\ddagger}}$ & .154$^{\phantom{\dagger\ddagger}}$ & .405$^{\phantom{\dagger\ddagger}}$ & .410$^{\dagger\phantom{\ddagger}}$ & .415$^{\dagger\phantom{\ddagger}}$ & .411$^{\dagger\phantom{\ddagger}}$ & .314$^{\dagger\phantom{\ddagger}}$ \\
     
     \midrule
     
-    BM25$_{Boost}$ & .355 & .372 & .287 & .364 & .271 & .529 & .546 & .541 & .540 & .412 \\
-    BM25$_{RF}$ & .303 & .332 & .241 & .262 & .191 & .606 & .611 & .590 & .552 & .426 \\
-    BM25$_{keyquery}$ & .252 & .285 & .219 & .224 & .162 & .533 & .549 & .552 & .523 & .406 \\
+    BM25$_{Boost}$ & \bfseries.355$^{\dagger\ddagger}$ & .372$^{\dagger\ddagger}$ & \bfseries.287$^{\dagger\ddagger}$ & \bfseries.364$^{\dagger\ddagger}$ & \bfseries.271$^{\dagger\ddagger}$ & .529$^{\ddagger\phantom{\dagger}}$ & .546$^{\ddagger\phantom{\dagger}}$ & .541$^{\ddagger\phantom{\dagger}}$ & .540$^{\ddagger\phantom{\dagger}}$ & .412$^{\ddagger\phantom{\dagger}}$ \\
+    BM25$_{RF}$ & .303$^{\dagger\ddagger}$ & .332$^{\dagger\ddagger}$ & .241$^{\dagger\phantom{\ddagger}}$ & .262$^{\dagger\ddagger}$ & .191$^{\dagger\ddagger}$ & .606$^{\dagger\ddagger}$ & .611$^{\dagger\ddagger}$ & \bfseries.590$^{\dagger\ddagger}$ & .552$^{\dagger\ddagger}$ & \bfseries .426$^{\dagger\ddagger}$ \\
+    BM25$_{keyquery}$ & .350$^{\dagger\ddagger}$ & \bfseries .391$^{\dagger\ddagger}$ & .233$^{\phantom{\dagger\ddagger}}$ & .262$^{\phantom{\dagger\ddagger}}$ & .185$^{\phantom{\dagger\ddagger}}$ & \bfseries.642$^{\phantom{\dagger\ddagger}}$ & .\bfseries 655$^{\ddagger\phantom{\dagger}}$ & .574$^{\dagger\phantom{\ddagger}}$ & \bfseries .554$^{\phantom{\dagger\ddagger}}$ & .422$^{\ddagger\phantom{\dagger}}$ \\
+
+
 
 \bottomrule
 \end{tabular}
