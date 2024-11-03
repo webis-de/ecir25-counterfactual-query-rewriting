@@ -1,3 +1,5 @@
+\enlargethispage*{2\baselineskip}
+
 \section{Related Work}
 \label{sec:related-work}
 
@@ -5,13 +7,14 @@
 %; for example Adar et al.~\cite{DBLP:conf/wsdm/AdarTDE09}, found as early as 2009 that ``a large portion of pages changing more than hourly.'' 
 making them only relevant for a limited time~\cite{DBLP:conf/sigir/TikhonovBBOKG13}. This relates directly to the observation that many queries are not unique but issued frequently~\cite{DBLP:conf/sigir/Dumais14,DBLP:journals/sigir/SilversteinHMM99}. Even the same users tend to repeat the same queries at different points in time~\cite{DBLP:conf/wsdm/TylerT10}.
 
-\paragraph{Temporal Information Retrieval.} The observed dynamics motivate Temporal Information Retrieval (TIR) with the goal to factor temporal information to improve the ranking quality~\cite{DBLP:journals/ftir/KanhabuaBN15,DBLP:journals/csur/CamposDJJ14}. For example, Elsas and Dumais propose a ranking algorithm incorporating temporal patterns for the term weighting~\cite{DBLP:conf/wsdm/ElsasD10}.
-%Although our proposed approaches take place in a temporal setting, they differ from TIR since no temporal features are considered directly. Instead, the opposite, counterfactually, the elapsed time between searches or any changes in documents are ignored, which makes the approach effective yet accessible.
+\vspace*{-1ex}
 
-%% PS: I would argue that the part on caching can be ignore in our setting
-%\paragraph{Caching in IR.} Tangental to TIR, caching in IR is also concerned with changes in documents and queries but rather motivated by efficiency~\cite{DBLP:conf/www/CambazogluJPBCLB10,DBLP:conf/sigir/Baeza-YatesGJMPS07}. Since a large portion of queries are issued more than once, caching the results can save time and computation at the cost of recency.
+\paragraph{Temporal Information Retrieval.} The observed dynamics motivate Temporal Information Retrieval (TIR) with the goal to factor temporal information to improve the ranking quality~\cite{DBLP:journals/ftir/KanhabuaBN15,DBLP:journals/csur/CamposDJJ14}. For example, Elsas and Dumais propose a ranking algorithm incorporating temporal patterns for the term weighting~\cite{DBLP:conf/wsdm/ElsasD10}.
+
+\vspace*{-1ex}
 
 \paragraph{Query Rewriting with Keyqueries.} Given a set of target documents, a keyquery is the minimal query that retrieves the target queries within its top-positions~\cite{gollub:2013a,hagen:2016b}. Keyqueries use terms generated via RM3 or other query expansion approaches as vocabular for an efficient enumaration of candidate queries~\cite{froebe:2022c,froebe:2021c}. We use keyqueries as they, contrary to RM3, generate a ranking for each candidate to test if all criteria are fullfilled, thereby fully leveraging historical data.
 
-% Things that sound related but are not yet checked/incorporated are appended to this sentence~\cite{li:2022}.
+\vspace*{-1ex}
+
 \paragraph{Evaluations in Dynamic Settings.} While it is well known that temporal dynamics can strongly influence the effectiveness of IR systems, the temporal dimension is rarely considered during evaluation. Soboroff~\cite{DBLP:conf/sigir/Soboroff06} initially investigated how temporal dynamics influence test collection evaluations and hypothesized how they could be maintained. Following this, the LongEval shared task~\cite{DBLP:conf/clef/AlkhalifaBDEAFG24,alkhalifa:2023} provides a test bed of an evolving web search scenario with a test collection that covers a time frame of over a year in multiple snapshots. Changes in evolving test collections can be described on a high level along the main components, the documents, topics, and qrels, and the create, update, and delete operations~\cite{keller:2024}. %While the LongEval dataset contains changes in all types of components, this study is mainly concerned with changing documents and ignore, counterfactually, changes in the relevance label.
