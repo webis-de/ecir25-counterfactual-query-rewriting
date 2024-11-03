@@ -67,7 +67,7 @@ def get_overlapping_topics(pt_dataset, overlapping_queries):
     return topics
 
 def find_best_expansion(oracle_retrieval_results, query, wmodel, index, output_dir):
-    return query['query']
+    return query['query'].replace('^nan', '^0.001')
 
 def get_reformulation_index(split):
     return pt.IndexRef.of(os.path.abspath(f"indices/{split}/"))
