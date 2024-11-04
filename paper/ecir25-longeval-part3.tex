@@ -10,7 +10,6 @@ For a set $H$~of historical relevance feedback with observations $(q, d, t) \in 
 \end{equation}
 While this qrel boosting is highly effective when documents do not change~\cite{alkhalifa:2024,keller:2024b}, it can not generalize to newly created or deleted documents.
 
-\enlargethispage*{\baselineskip}
 \paragraph{Previously Relevant Documents as Relevance Feedback.} Given a retrieval model, the current document corpus~$D$, and historical relevance feedback~$H$, we expand each query with $k$~terms with the highest tf-idf scores of previously known relevant documents. For a query $q$, the set $D^{+} = \{d| (q,d,t) \in H \wedge rel(q,d,t) > 0\}$ specifies the previously positive documents on which we calculate the tf-idf scores. The top $k$~terms with the highest tf-idf score are obtained for query expansion and appended to the original query. The expanded query is submitted against the retrieval system on the current document corpus $D$ to yield the ranking. As this expansion only uses tf-idf scores on  previous corpora, they can be calculated offline. Improving upon boosting, this allows to generalize from the historical relevance feedback to potentially deleted or newly created documents.
 
 
