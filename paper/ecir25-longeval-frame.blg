@@ -1,13 +1,12 @@
-This is BibTeX, Version 0.99d (TeX Live 2024/Arch Linux)
+This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ecir25-longeval-frame.aux
 The style file: splncs04.bst
 Database file #1: ecir25-longeval-lit.bib
-Warning--I didn't find a database entry for "gollub:2013a:hagen:2016b"
 Warning--missing publisher in robertson:1994
 You've used 30 entries,
             2850 wiz_defined-function locations,
-            806 strings with 13831 characters,
+            805 strings with 13807 characters,
 and the built_in function-call counts, 23130 in all, are:
 = -- 1845
 > -- 979
@@ -46,4 +45,4 @@ warning$ -- 1
 while$ -- 174
 width$ -- 32
 write$ -- 360
-(There were 2 warnings)
+(There was 1 warning)

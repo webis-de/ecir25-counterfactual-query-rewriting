@@ -1,16 +1,31 @@
 \title{Counterfactual Query Rewriting \\ to Use Historical Relevance Feedback}
-%\titlerunning{Abbreviated paper title}
+% \titlerunning{Abbreviated paper title}
 
-\author{No author given}
+\author{
+    Jüri Keller\inst{1} \orcidID{0000-0002-9392-8646} \and
+    Maik Fr{\"{o}}be\inst{2} \orcidID{0000-0002-1003-981X} \and
+    Gijs Hendriksen\inst{3} \orcidID{0000-0003-0945-3148} \and
+    Daria Alexander\inst{3} \orcidID{0000-0001-9478-7083} \and
+    Martin Potthast\inst{4} \orcidID{0000-0003-2451-0665} \and
+    Matthias Hagen\inst{2} \orcidID{0000-0002-9733-2890} \and
+    Philipp Schaer\inst{1} \orcidID{0000-0002-8817-4632} 
+}
 
-\authorrunning{No author given}
+\authorrunning{Keller et al.}
 
-\institute{No institute given}
+\institute{
+    TH Köln - University of Applied Sciences, Cologne, Germany \and
+    Friedrich-Schiller-Universität Jena \and
+    Radboud Universiteit Nijmegen \and
+    University of Kassel, hessian.AI, ScaDS.AI
+}
 
 \maketitle
 
 \begin{abstract}
-When a retrieval system receives a query it has encountered before, previous relevance feedback like clicks or explicit judgments can help to return good results. However, the content of a previously relevant document may have changed, or the document might not be available anymore. In this paper, we propose to counterfactually assume that the relevant versions of the documents are still part of the retrieval collection (i.e., we artificially include them). Against this slightly changed collection, we derive so-called keyqueries for the previously relevant document variants---i.e., queries that return the relevant document variants in the top ranks. From the keyqueries' results, we then remove the artificially included document variants to derive the final retrieval result. Our evaluation in the CLEF LongEval scenario shows that rewriting queries with historical relevance feedback improves the retrieval effectiveness and even outperforms computationally expensive transformer-based approaches.
+    When a retrieval system receives a query it has encountered before, previous relevance feedback, such as clicks or explicit judgments can help to improve retrieval results. However, the content of a previously relevant document may have changed, or the document might not be available anymore. Despite this evolved corpus, we counterfactually use these previously relevant documents as relevance signals. 
+    In this paper we proposed approaches to rewrite user queries and compare them against a system that directly uses the previous qrels for the ranking. We expand queries with terms extracted from the previously relevant documents or derive so-called keyqueries that rank the previously relevant documents to the top of the current corpus. 
+    Our evaluation in the CLEF LongEval scenario shows that rewriting queries with historical relevance feedback improves the retrieval effectiveness and even outperforms computationally expensive transformer-based approaches.
 
 \keywords{Query Rewriting \and Keyqueries \and Longitudinal Evaluation}
 \end{abstract}
