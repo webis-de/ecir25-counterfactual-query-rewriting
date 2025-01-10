@@ -10,12 +10,12 @@ For a set $H$~of historical relevance feedback with observations $(q, d, t) \in 
 % \end{equation}
 
 \begin{equation}
-    \prod\limits_{t \in \{t_{1}, \ldots, t_{k}\}} 
-    score (d,q) \cdot
+    \text{score}(q,d) \; = \; \text{score}_0 \;\times \;
+    \prod_{t = t_1}^{t_k}
     \begin{cases}
         (1 - \lambda)^2, & \text{if } rel(q,d,t) = 0, \\
         \lambda^2, & \text{if } rel(q,d,t) = 1, \\
-        \lambda^2 \cdot \mu, & \text{if } rel(q,d,t) = 2.
+        \lambda^2  \mu, & \text{if } rel(q,d,t) = 2.
         \end{cases}
 \end{equation}
     
