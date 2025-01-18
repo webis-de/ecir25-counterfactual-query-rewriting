@@ -6,15 +6,15 @@ Database file #1: ecir25-longeval-lit.bib
 Warning--missing publisher in robertson:1994
 You've used 33 entries,
             2850 wiz_defined-function locations,
-            827 strings with 15376 characters,
-and the built_in function-call counts, 26543 in all, are:
-= -- 2089
+            823 strings with 15208 characters,
+and the built_in function-call counts, 26519 in all, are:
+= -- 2085
 > -- 1173
 < -- 38
 + -- 453
 - -- 419
-* -- 1846
-:= -- 3402
+* -- 1834
+:= -- 3398
 add.period$ -- 97
 call.type$ -- 33
 change.case$ -- 310
@@ -23,13 +23,13 @@ cite$ -- 34
 duplicate$ -- 2231
 empty$ -- 2176
 format.name$ -- 463
-if$ -- 5735
+if$ -- 5731
 int.to.chr$ -- 0
 int.to.str$ -- 33
 missing$ -- 524
 newline$ -- 105
 num.names$ -- 96
-pop$ -- 945
+pop$ -- 949
 preamble$ -- 1
 purify$ -- 231
 quote$ -- 0
@@ -44,5 +44,5 @@ type$ -- 124
 warning$ -- 1
 while$ -- 195
 width$ -- 35
-write$ -- 401
+write$ -- 397
 (There was 1 warning)

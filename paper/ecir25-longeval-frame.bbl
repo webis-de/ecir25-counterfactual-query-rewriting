@@ -41,7 +41,7 @@ Bernstein, Y., Zobel, J.: Redundant documents and search effectiveness. In:
   Herzog, O., Schek, H., Fuhr, N., Chowdhury, A., Teiken, W. (eds.) Proceedings
   of the 2005 {ACM} {CIKM} International Conference on Information and
   Knowledge Management, Bremen, Germany, October 31 - November 5, 2005. pp.
-  736--743. {ACM} (2005), \url{https://doi.org/10.1145/1099554.1099733}
+  736--743. {ACM} (2005)
 
 \bibitem{DBLP:journals/csur/CamposDJJ14}
 Campos, R., Dias, G., Jorge, A.M., Jatowt, A.: Survey of temporal information
@@ -51,8 +51,7 @@ Campos, R., Dias, G., Jorge, A.M., Jatowt, A.: Survey of temporal information
 \bibitem{chuklin:2015}
 Chuklin, A., Markov, I., de~Rijke, M.: Click Models for Web Search. Synthesis
   Lectures on Information Concepts, Retrieval, and Services, Morgan {\&}
-  Claypool Publishers (2015). \doi{10.2200/S00654ED1V01Y201507ICR043},
-  \url{https://doi.org/10.2200/S00654ED1V01Y201507ICR043}
+  Claypool Publishers (2015). \doi{10.2200/S00654ED1V01Y201507ICR043}
 
 \bibitem{DBLP:conf/sigir/Dumais14}
 Dumais, S.T.: Putting searchers into search. In: {SIGIR}. pp.~1--2. {ACM}
@@ -146,8 +145,7 @@ Keller, J., Breuer, T., Schaer, P.: Evaluation of temporal change in {IR} test
   collections. In: Oosterhuis, H., Bast, H., Xiong, C. (eds.) Proceedings of
   the 2024 {ACM} {SIGIR} International Conference on Theory of Information
   Retrieval, {ICTIR} 2024, Washington, DC, USA, 13 July 2024. pp. 3--13. {ACM}
-  (2024). \doi{10.1145/3664190.3672530},
-  \url{https://doi.org/10.1145/3664190.3672530}
+  (2024). \doi{10.1145/3664190.3672530}
 
 \bibitem{keller:2024b}
 Keller, J., Breuer, T., Schaer, P.: Leveraging prior relevance signals in web
@@ -171,8 +169,7 @@ Lin, J., Nogueira, R.F., Yates, A.: Pretrained Transformers for Text Ranking:
 
 \bibitem{liu:2011}
 Liu, T.: Learning to Rank for Information Retrieval. Springer (2011).
-  \doi{10.1007/978-3-642-14267-3},
-  \url{https://doi.org/10.1007/978-3-642-14267-3}
+  \doi{10.1007/978-3-642-14267-3}
 
 \bibitem{macdonald:2020}
 Macdonald, C., Tonellotto, N.: Declarative experimentation in information
