@@ -87,10 +87,28 @@ Fr{\"o}be, M., G{\"u}nther, S., Bondarenko, A., Huck, J., Hagen, M.: {Using
   2nd Workshop on Reducing Online Misinformation through Credible Information
   Retrieval (ROMCIR 2022). CEUR Workshop Proceedings, CEUR-WS.org (Apr 2022)
 
+\bibitem{froebe:2023e}
+Fr{\"o}be, M., Reimer, J.H., MacAvaney, S., Deckers, N., Reich, S., Bevendorff,
+  J., Stein, B., Hagen, M., Potthast, M.: {The Information Retrieval Experiment
+  Platform}. In: Chen, H.H., Duh, W., Huang, H.H., Kato, M., Mothe, J.,
+  Poblete, B. (eds.) 46th International ACM SIGIR Conference on Research and
+  Development in Information Retrieval (SIGIR 2023). pp. 2826--2836. ACM (Jul
+  2023). \doi{10.1145/3539618.3591888}
+
 \bibitem{froebe:2021c}
 Fr{\"o}be, M., Schmidt, E.O., Hagen, M.: Efficient query obfuscation with
   keyqueries. In: IEEE/WIC/ACM International Conference on Web Intelligence and
   Intelligent Agent Technology. pp. 154--161 (2021)
+
+\bibitem{froebe:2023b}
+Fr{\"o}be, M., Wiegmann, M., Kolyada, N., Grahm, B., Elstner, T., Loebe, F.,
+  Hagen, M., Stein, B., Potthast, M.: {Continuous Integration for Reproducible
+  Shared Tasks with TIRA.io}. In: Kamps, J., Goeuriot, L., Crestani, F.,
+  Maistro, M., Joho, H., Davis, B., Gurrin, C., Kruschwitz, U., Caputo, A.
+  (eds.) Advances in Information Retrieval. 45th European Conference on {IR}
+  Research ({ECIR} 2023). pp. 236--241. Lecture Notes in Computer Science,
+  Springer, Berlin Heidelberg New York (Apr 2023).
+  \doi{10.1007/978-3-031-28241-6_20}
 
 \bibitem{galuscakova:2023}
 Galusc{\'{a}}kov{\'{a}}, P., Deveaud, R., S{\'{a}}ez, G.G., Mulhem, P.,

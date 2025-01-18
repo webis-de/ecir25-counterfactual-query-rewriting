@@ -5,9 +5,6 @@ We present three approaches that incorporate historical relevance feedback, from
 For a set $H$~of historical relevance feedback with observations $(q, d, t) \in H$, $rel(q, d, t)$ is the (graded) relevance judgment for document~$d$ for query~$q$ at timestamp~$t$. Document~$d$ may have been deleted or substantially changed in the current corpus~(Table~\ref{table-examples}), which is why we counterfactually use the version of the document at the timestamp $t$ where the relevance observation was made.
 
 \paragraph{Boosting Previously Relevant Documents.} Given a ranking~$r$ and a set of historical relevance feedback~$H$, boosting incorporates a document's historical relevance label, regardless of how much the document has changed or how old the relevance feedback is. We apply boosting to adjust the scores of documents based on their historical relevance. For a document~$d$ previously observed for the query~$q$ at the timestamps $t_{1}, \ldots, t_{k}$, we increase the score if it is relevant, respectively decrease the score if it is not-relevant at the corresponding timestamps using a weighting factor $\lambda^2$ and additionally boost highly relevant documents by a factor of $\mu$. The boosted score of document $d$ for query $q$ is then computed by:
-% \begin{equation}
-% \sum\limits_{t \in \{t_{1}, \ldots, t_{k}\}} \lambda^2 \cdot \mu \cdot rel(q,d,t)
-% \end{equation}
 
 \begin{equation}
     \text{score}(q,d) \; = \; \text{score}_0 \;\times \;
