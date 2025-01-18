@@ -8,14 +8,14 @@ The LongEval test collection~\cite{galuscakova:2023} samples documents, queries,
 We contrast five baselines with our three approaches. We use BM25~\cite{robertson:1994}, BM25 with RM3 expansion (implemented in PyTerrier~\cite{macdonald:2020}), ColBERT~\cite{khattab:2020}, List-in-T5~\cite{tamber:2023}, and monoT5~\cite{nogueira:2020}. We use the default hyperparameters for all baselines (exporting ColBERT, List-in-T5, and monoT5 from TIRA/TIREx~\cite{froebe:2023e,froebe:2023b}). We also implement our three approaches in PyTerrier using BM25 as the underlying retrieval model. For boosting (BM25$_{Boost}$), we set $\lambda=0.7$ and $\mu=2$ based on previous experiments~\cite{keller:2024b}. For relevance feedback (BM25$_{RF}$), $k=10$ feedback terms are used as this is also the default for RM3 in PyTerrier. For keyqueries (BM25$_{keyquery}$), we use 10~feedback terms aiming at queries that retrieve the target tocuments to the top-10 while having more than 25~results.
 
 \begin{figure}[t]
-    \begin{minipage}{.49\textwidth}
+    \begin{minipage}{.48\textwidth}
         \includegraphics[width=\textwidth]{query-overlap}
         \vspace{-4ex}
-        \caption{Frequency of queries over time.}
+        \caption{Frequency of overlapping queries over the different timestamps.}
         \label{fig:query-overlap}
     \end{minipage}
     \hfill    
-    \begin{minipage}{.49\textwidth}
+    \begin{minipage}{.50\textwidth}
         \includegraphics[width=\textwidth]{document-similarities}
         \vspace{-4ex}
         \caption{S$_{3}$ Similarities of documents with overlapping URLs as eCDF plot.}
