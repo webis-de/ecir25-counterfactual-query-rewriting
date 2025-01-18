@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2023)
+This is BibTeX, Version 0.99d (TeX Live 2024/Arch Linux)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: ecir25-longeval-frame.aux
 The style file: splncs04.bst
 Database file #1: ecir25-longeval-lit.bib
 Warning--missing publisher in robertson:1994
-You've used 30 entries,
+You've used 31 entries,
             2850 wiz_defined-function locations,
-            805 strings with 13807 characters,
-and the built_in function-call counts, 23130 in all, are:
-= -- 1845
-> -- 979
-< -- 34
-+ -- 381
-- -- 350
-* -- 1584
-:= -- 2962
-add.period$ -- 85
-call.type$ -- 30
-change.case$ -- 273
+            813 strings with 14369 characters,
+and the built_in function-call counts, 24157 in all, are:
+= -- 1915
+> -- 1032
+< -- 36
++ -- 400
+- -- 368
+* -- 1663
+:= -- 3091
+add.period$ -- 89
+call.type$ -- 31
+change.case$ -- 282
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 1948
-empty$ -- 1924
-format.name$ -- 388
-if$ -- 5017
+cite$ -- 32
+duplicate$ -- 2041
+empty$ -- 2005
+format.name$ -- 408
+if$ -- 5234
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 449
-newline$ -- 96
-num.names$ -- 84
-pop$ -- 824
+int.to.str$ -- 31
+missing$ -- 474
+newline$ -- 99
+num.names$ -- 88
+pop$ -- 861
 preamble$ -- 1
-purify$ -- 203
+purify$ -- 209
 quote$ -- 0
-skip$ -- 537
+skip$ -- 553
 stack$ -- 0
-substring$ -- 1192
-swap$ -- 1170
-text.length$ -- 34
+substring$ -- 1239
+swap$ -- 1234
+text.length$ -- 36
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 112
+type$ -- 116
 warning$ -- 1
-while$ -- 174
-width$ -- 32
-write$ -- 360
+while$ -- 181
+width$ -- 33
+write$ -- 374
 (There was 1 warning)
