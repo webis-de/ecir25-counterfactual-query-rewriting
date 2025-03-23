@@ -1,4 +1,4 @@
-# ECIR25 (Under Review): Counterfactual Query Rewriting for Historical Relevance Feedback
+# ECIR25: Counterfactual Query Rewriting for Historical Relevance Feedback
 
 ### Abstract
 
